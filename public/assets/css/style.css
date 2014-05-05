@@ -1,0 +1,321 @@
+html {
+    height: 100%;
+}
+
+/*background*/
+body {
+    min-height: 100%;
+    background: url("../img/strange_bullseyes/strange_bullseyes/strange_bullseyes.png") repeat;
+}
+img{
+    max-width: 100%;
+}
+body.sign-in-page {
+}
+
+body.register-page {
+}
+
+body.home-page {
+    height: 100%;
+}
+
+body.home-page .container,
+body.home-page .container > .row {
+    height: 100%;
+    padding: 0;
+}
+.page-content {
+    height: 100%;
+    padding-top: 50px;
+}
+.copyright {
+    padding: 10px;
+    line-height: 20px;
+    height: 40px;
+    text-align: center;
+}
+.tagsBlock {
+    padding: 10px;
+    line-height: 20px;
+    height: 40px;
+    text-align: center;
+}
+.sidebar-elements{
+    text-align: center;
+}
+
+.navbar {
+    border-radius: 0;
+}
+.navbar-absolute {
+    position: absolute;
+    margin: 0;
+    right: 0;
+    left: 0;
+}
+.va-middle {
+    vertical-align: middle;
+}
+
+.custom-checkbox {
+    background: url("../img/unchecked-checkbox-icon.png") 0 50% no-repeat !important;
+    box-shadow: none !important;
+    padding: 6px 12px 6px 24px !important;
+}
+
+.custom-checkbox.active {
+    background-image: url("../img/checked-checkbox-icon.png") !important;
+}
+
+form span.required {
+    font-size: 1.5em;
+    line-height: 0;
+    color: #f33;
+    font-weight: bold;
+}
+
+body.sign-in-page form,
+body.register-page form {
+    padding: 50px 0;
+}
+
+.logo-link {
+    margin: 10px 0;
+    display: inline-block;
+}
+
+.main-sidebar {
+    height: 100%;
+    width: 25%;
+    float: right;
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    border-right: none;
+    padding: 15px;
+    overflow: auto;
+}
+
+.main-content {
+    float: left;
+    height: 100%;
+    width: 75%;
+    background: #fff;
+    position: relative;
+    border: 1px solid #eee;
+    padding: 15px;
+    overflow: auto;
+}
+
+.main-content .full-screen {
+    z-index: 1100;
+    position: fixed;
+    font-size: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.profile-view,
+.profile-edit {
+    padding: 15px;
+}
+
+.profile-view .profile-img,
+.profile-edit .profile-img {
+    text-align: center;
+}
+
+.profile-view .profile-img-wrapper,
+.profile-edit .profile-img-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #ddd;
+    width: 150px;
+    height: 150px;
+    max-width: 100%;
+    font-size: 0;
+}
+.profile-img-wrapper img {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+.profile-view .profile-img-wrapper:before,
+.profile-edit .profile-img-wrapper:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.profile-edit .form-submit {
+    text-align: right;
+}
+
+.profile-info-row {
+
+}
+
+.profile-info-row + .profile-info-row {
+    margin-top: 5px;
+}
+
+.info-label {
+    font-weight: bold;
+}
+
+.info-value {
+}
+
+.profile-view{
+    background: #eee;
+    text-align: center;
+    border-radius: 2em;
+    padding: 1em;
+    margin: 10px auto;
+}
+
+.profile-view{
+    border-radius: 2em;
+}
+
+.profile-view{
+    padding: 0 5px;
+}
+
+.incompatibility-msg {
+    text-align: center;
+    padding: 10%;
+    display: block;
+    color: #0000e2;
+    font-size: 42px;
+}
+
+.toggle-sidebar {
+    margin-right: 0;
+    margin-left: 15px;
+    float: left; /*left*/
+
+}
+
+.mobile-navigation .toggle-sidebar:hover {
+    box-shadow: inset 0 0 10px 0 #222;
+}
+
+.mobile-navigation .toggle-sidebar:active {
+    box-shadow: inset 0 0 10px 0 #000;
+}
+
+.mobile-navigation .toggle-sidebar .icon-bar {
+    display: block;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #fff;
+}
+
+.mobile-navigation .toggle-sidebar .icon-bar + .icon-bar {
+    margin-top: 4px;
+}
+
+.main-sidebar .tab-content {
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.photo-search {
+    margin-bottom: 5px;
+}
+
+@media (min-width: 992px) {
+    .container {
+        transition: max-width 0.5s;
+    }
+
+    .info-label {
+        text-align: right;
+        font-weight: bold;
+    }
+
+    .info-label:after {
+        content: ":";
+    }
+}
+
+@media (max-width: 900px) {
+    .main-sidebar {
+        /*animation fix on resize*/
+        transition: left 0.5s;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-sidebar {
+        border: none;
+        position: absolute;
+        left: -100%;
+        border-right: 1px solid #eee;
+        right: 10%;
+        width: 100%;
+        max-width: 400px;
+        z-index: 5;
+        box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    }
+
+    .main-content {
+        border: none;
+        width: 100%;
+    }
+
+    .main-sidebar.active {
+        left: 0%;
+    }
+}
+
+.loading {
+    background: white url(../img/snake-loader.gif)  no-repeat calc(100% - 10px) 50%;
+}
+
+.clear {
+    clear:both;
+}
+
+.thumbnail img{
+    width: 100%;
+    min-height: 200px;
+}
+
+.admin-panel-li a{
+    background-color: indianred;
+}
+
+.nav-relative{
+    position: relative;
+}
+
+.alert-process{
+    display:none;
+}
+
+#album-or-photo-title{
+    width:100%;
+}
+
+.modal-content{
+    background: rgba(0,0,0,0.7);
+}
+.modal-header, .modal-footer{
+    border-color: rgba(0,0,0,0.5);
+}
+.modal-dialog{
+    width: 800px;
+    max-width: 100%;
+}
