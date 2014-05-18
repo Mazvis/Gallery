@@ -71,10 +71,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         if ($v->fails())
             $messages = $v->messages();
         else
-        if ($input['is_clicked'] == 'yes')
-            return self::saveUserToDatabase($input);
-        else
-            return "GOOD";
+            if ($input['is_clicked'] == 'yes')
+                return self::saveUserToDatabase($input);
+            else
+                return "GOOD";
 
         return $messages;
     }

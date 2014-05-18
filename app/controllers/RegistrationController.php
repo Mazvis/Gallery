@@ -39,5 +39,4 @@ class RegistrationController extends BaseController {
         Auth::logout();
         return Redirect::intended('/');
     }
-
 }

@@ -64,13 +64,13 @@
                         <li class="@if(Request::is('/'))active@endif">{{ HTML::link('/', 'Home') }}</li>
                         <li class="@if(Request::is('albums')){{'active'}}@else{{' '}}@endif">{{ HTML::link('/albums', 'Albums') }}</li>
                         @if(Auth::check())
-                            <li class="dropdown @if(Request::is('panel')){{'active'}}@else{{' '}}@endif">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">user panel<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ URL::to('profile') }}">Profile</a></li>
-                                    @if(Auth::user()->role_id == 1)<li class="admin-panel-li"><a href="{{ URL::to('panel') }}">Admin panel</a></li>@endif
-                                </ul>
-                            </li>
+                        <li class="dropdown @if(Request::is('panel')){{'active'}}@else{{' '}}@endif">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">user panel<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ URL::to('profile') }}">Profile</a></li>
+                                @if(Auth::user()->role_id == 1)<li class="admin-panel-li"><a href="{{ URL::to('panel') }}">Admin panel</a></li>@endif
+                            </ul>
+                        </li>
                         @else
                         <li class="@if(Request::is('registration')){{'active'}}@else{{' '}}@endif">{{ HTML::link('registration', 'Register') }}</li>
                         @endif

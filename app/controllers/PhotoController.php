@@ -5,9 +5,9 @@
  */
 class PhotoController extends BaseController {
 
-/*
- * EDIT
- */
+    /*
+     * EDIT
+     */
 
     /**
      * Edits photo information
@@ -37,9 +37,9 @@ class PhotoController extends BaseController {
         }
     }
 
-/*
- * GETS
- */
+    /*
+     * GETS
+     */
 
     /**
      * Returns single photo data
@@ -63,9 +63,9 @@ class PhotoController extends BaseController {
         return $photo->getAllPhotoData();
     }
 
-/*
- * DELETES
- */
+    /*
+     * DELETES
+     */
 
     /**
      * Deltes photo from photo page
@@ -87,9 +87,9 @@ class PhotoController extends BaseController {
         //return $currentAlbumId;
     }
 
-/*
- * LIKES
- */
+    /*
+     * LIKES
+     */
 
     /**
      * Gets all photo likes(likers)
@@ -142,9 +142,9 @@ class PhotoController extends BaseController {
         }
     }
 
-/*
- * COMMENTS
- */
+    /*
+     * COMMENTS
+     */
 
     /**
      * Get all photo comments
@@ -176,9 +176,9 @@ class PhotoController extends BaseController {
         return $photo->writeComment($comment, $currentPhotoId, $currentUserID, $posterIp);
     }
 
-/*
- * TAGS
- */
+    /*
+     * TAGS
+     */
 
     /**
      * Gets photo tags(for editing)
@@ -223,9 +223,9 @@ class PhotoController extends BaseController {
         return Redirect::to('search/'.$tagName);
     }
 
-/*
- * CATEGORIES
- */
+    /*
+     * CATEGORIES
+     */
 
     /**
      * Gets all created categories
@@ -293,9 +293,9 @@ class PhotoController extends BaseController {
             }
     }
 
-/*
- * VIEWS
- */
+    /*
+     * VIEWS
+     */
 
     /**
      * Count views
@@ -307,9 +307,9 @@ class PhotoController extends BaseController {
         $photo->countViews($photoId);
     }
 
-/*
- * SIDEBAR
- */
+    /*
+     * SIDEBAR
+     */
 
     /**
      * Gets random photo for sidebar
@@ -332,9 +332,9 @@ class PhotoController extends BaseController {
         return $photo->getMostViewedPhoto();
     }
 
-/*
- * PRIVILEGES
- */
+    /*
+     * PRIVILEGES
+     */
 
     /**
      * @param $photoId
@@ -347,6 +347,4 @@ class PhotoController extends BaseController {
         $photo = new Photo();
         return $photo->isUserPhotoCreator($currentUserId, $photoId);
     }
-
-
 }

@@ -5,9 +5,9 @@
  */
 class Album{
 
-/*
- * UPLOADING/EDITING
- */
+    /*
+     * UPLOADING/EDITING
+     */
 
     /**
      * Uploads photo/photos to album
@@ -75,8 +75,8 @@ class Album{
                                 //makes photo thumb
                                 $fileForThumb = $destinationPath."/".$insertedPhotoId.".".$extension;
                                 App::make('phpthumb')
-                                ->create('resize', array($fileForThumb, 200, 200, 'adaptive'))
-                                ->save($destinationPath."/", $insertedPhotoId."_thumb.".$extension);
+                                    ->create('resize', array($fileForThumb, 200, 200, 'adaptive'))
+                                    ->save($destinationPath."/", $insertedPhotoId."_thumb.".$extension);
 
                                 DB::update('update photos set
                                 photo_destination_url = ?,
@@ -167,8 +167,8 @@ class Album{
                                         ));
                                 }
                             }
+                        }
                     }
-                }
             }
         }
         return $insertedPhotoId;
@@ -269,9 +269,9 @@ class Album{
 
     }
 
-/*
- * GETS
- */
+    /*
+     * GETS
+     */
 
     /**
      * Gets all single album photos
@@ -300,9 +300,9 @@ class Album{
         return $albums;
     }
 
-/*
- * DELETES
- */
+    /*
+     * DELETES
+     */
 
     /**/
 
@@ -374,9 +374,9 @@ class Album{
         return 'Deleted';
     }
 
-/*
- * LIKES
- */
+    /*
+     * LIKES
+     */
 
     /**
      * Gets album likes
@@ -428,9 +428,9 @@ class Album{
         return $currentUserID;
     }
 
-/*
- * COMMENTS
- */
+    /*
+     * COMMENTS
+     */
 
     /**
      * Gets all album comments
@@ -484,9 +484,9 @@ class Album{
                     return "Deleted";
     }
 
-/*
- * VIEWS
- */
+    /*
+     * VIEWS
+     */
 
     /**
      * Count album views
@@ -497,9 +497,9 @@ class Album{
         DB::update('update albums set views = views+1 where album_id = ?', array($albumId));
     }
 
-/*
- * USER
- */
+    /*
+     * USER
+     */
 
     /**
      * Gets all chosen user albums
@@ -538,7 +538,7 @@ class Album{
     }
 
     /**
-     * @param $albums
+     * @param $photos
      * @return null
      */
     public function isAlbumsCreatorForAlbumsTemplate($albums){
@@ -557,9 +557,9 @@ class Album{
         }
     }
 
-/*
-* SIDEBAR CONTENT
-*/
+    /*
+    * SIDEBAR CONTENT
+    */
 
     /**
      * Gets five recent created albums

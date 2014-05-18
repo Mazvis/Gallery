@@ -5,9 +5,9 @@
  */
 class Photo{
 
-/*
- * EDIT
- */
+    /*
+     * EDIT
+     */
 
     /**
      * Edits photo
@@ -146,9 +146,9 @@ class Photo{
         }
     }
 
-/*
- * GETS
- */
+    /*
+     * GETS
+     */
 
     /**
      * Gets photo data
@@ -178,9 +178,9 @@ class Photo{
         return $photos;
     }
 
-/*
- * DELETES
- */
+    /*
+     * DELETES
+     */
 
     /**
      * Deltes photo
@@ -214,9 +214,9 @@ class Photo{
         return $s;
     }
 
-/*
- * LIKES
- */
+    /*
+     * LIKES
+     */
 
     /**
      * Return photo likes
@@ -268,9 +268,9 @@ class Photo{
         return $currentUserID;
     }
 
-/*
- * COMMENTS
- */
+    /*
+     * COMMENTS
+     */
 
     /**
      * Returns photo Comment array
@@ -308,9 +308,9 @@ class Photo{
         return $comment;
     }
 
-/*
- * TAGS
- */
+    /*
+     * TAGS
+     */
 
     /**
      * Gets photo tags(for editing)
@@ -356,9 +356,9 @@ class Photo{
         WHERE photo_tags.tags LIKE ?", array('%'.$tagName.'%'));
     }
 
-/*
- * CATEGORIES
- */
+    /*
+     * CATEGORIES
+     */
 
     /**
      * Returns all category array
@@ -462,9 +462,9 @@ class Photo{
         return Redirect::back();
     }
 
-/*
- * VIEWS
- */
+    /*
+     * VIEWS
+     */
 
     /**
      * Count photo views
@@ -475,9 +475,9 @@ class Photo{
         DB::update('update photos set views = views+1 where photo_id = ?', array($photoId));
     }
 
-/*
- * PRIVILEGES
- */
+    /*
+     * PRIVILEGES
+     */
     /**
      * Checks if user is photo creator
      *
@@ -536,9 +536,9 @@ class Photo{
     }
 
 
-/*
- * SIDEBAR
- */
+    /*
+     * SIDEBAR
+     */
 
     /**
      * Gets random photo from database

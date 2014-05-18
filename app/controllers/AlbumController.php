@@ -5,9 +5,9 @@
  */
 class AlbumController extends BaseController {
 
-/*
- * UPLOADING/ EDITING
- */
+    /*
+     * UPLOADING/ EDITING
+     */
 
     /**
      * Uploads photo/photos to album
@@ -71,9 +71,9 @@ class AlbumController extends BaseController {
         //return Redirect::to('albums/'.$currentAlbumId);
     }
 
-/*
- * GETS
- */
+    /*
+     * GETS
+     */
 
     /**
      * Gets all single album photos
@@ -97,9 +97,9 @@ class AlbumController extends BaseController {
         return $album->getAlbumDataByAlbumId($albumId);
     }
 
-/*
- * DELETES
- */
+    /*
+     * DELETES
+     */
 
     /**
      * Deletes photo from album
@@ -113,8 +113,8 @@ class AlbumController extends BaseController {
             $photoId = strip_tags(Input::get('photoId'));
             $photo = new Photo();
             if($photo->isUserPhotoCreator($currentUserID, $photoId) || Auth::user()->role_id == 1){
-               $album = new Album();
-               return $album->deletePhoto($photoId);
+                $album = new Album();
+                return $album->deletePhoto($photoId);
             }
         }
         return "not singned in or havent rules to delete";
@@ -139,9 +139,9 @@ class AlbumController extends BaseController {
         return "u have no rules";
     }
 
-/*
- * LIKES
- */
+    /*
+     * LIKES
+     */
     /**
      * Gets album likes
      *
@@ -193,9 +193,9 @@ class AlbumController extends BaseController {
         }
     }
 
-/*
- * COMMENTS
- */
+    /*
+     * COMMENTS
+     */
 
     /**
      * Gets all album comments
@@ -240,9 +240,9 @@ class AlbumController extends BaseController {
         }
     }
 
-/*
- * VIEWS
- */
+    /*
+     * VIEWS
+     */
 
     /**
      * Counts album views
@@ -254,9 +254,9 @@ class AlbumController extends BaseController {
         return $album->countViews($albumId);
     }
 
-/*
- * USER
- */
+    /*
+     * USER
+     */
 
     /**
      * Gets all chosen user albums
@@ -300,9 +300,9 @@ class AlbumController extends BaseController {
         return 0;
     }
 
-/*
- * SIDEBAR CONTENT
- */
+    /*
+     * SIDEBAR CONTENT
+     */
 
     /**
      * Gets five recent created albums

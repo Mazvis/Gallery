@@ -26,6 +26,8 @@ class HomeController extends BaseController {
 
         $photo = new Photo();
         $this->layout->content->photo_data_array2 = $photo->getAllPhotoData();
+
+        $this->layout->content->isPhotoCreator = $photo->isPhotoCreatorForPhotos();
     }
 
     /**
@@ -221,11 +223,11 @@ class HomeController extends BaseController {
         $photos = $photo->getPhotosByTagName($tagName);
         //var_dump($photos);
         //if this tag exists
-            $this->layout->content = View::make('tag', array('tagName' => $tagName));
-            $this->layout->bodyclass = "home-page";
+        $this->layout->content = View::make('tag', array('tagName' => $tagName));
+        $this->layout->bodyclass = "home-page";
 
-            //$this->layout->content->photos = $photo->getPhotoDataByTagId($tag[0]->tag_id);
-            $this->layout->content->photos = $photos;
+        //$this->layout->content->photos = $photo->getPhotoDataByTagId($tag[0]->tag_id);
+        $this->layout->content->photos = $photos;
 
         $photoM = new Photo();
         $this->layout->content->isPhotoCreator = $photoM->isPhotoCreatorForPhotosTemplate($photos);
