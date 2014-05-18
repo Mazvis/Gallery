@@ -19,9 +19,10 @@ class AlbumsController extends BaseController {
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $fullDescription = strip_tags(Input::get('description'));
                 $placeTaken = strip_tags(Input::get('place'));
+                $selectedCategories = Input::get('categories');
 
                 $albums = new Albums;
-                return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken);
+                return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories);
             }
         }
         return Redirect::back();

@@ -127,6 +127,10 @@ class HomeController extends BaseController {
         $this->layout->content->allAlbums = $albums->getAllAlbums();
 
         $this->layout->content->isAlbumCreator = $albums->isAlbumCreator();
+
+        //categories
+        $photo = new PhotoController();
+        $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
     }
 
     /**
@@ -161,6 +165,7 @@ class HomeController extends BaseController {
 
             //categories
             $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
+            $this->layout->content->categories = $album->getCategoriesData($albumId);
 
             //roles
             $this->layout->content->isUserHavingPrivilegies = $album->isUserHavingPrivilegies($albumId);

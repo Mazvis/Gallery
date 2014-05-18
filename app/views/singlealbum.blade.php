@@ -33,6 +33,7 @@
         <p><strong>Created at:</strong> {{ $albumData->album_created_at }}</p>
         <p><strong>Album fool description:</strong> Album full description: {{ $albumData->album_full_description }}</p>
         <p><strong>Creator:</strong> {{ HTML::link('user/'.$albumData->username, $albumData->username) }}</p>
+        <p><strong>Category:</strong>  @for ($i = 0; $i < sizeOf($categories); $i++) {{ HTML::link('category/'.$categories[$i], $categories[$i]) }}@if($i < sizeOf($categories)-1), @endif @endfor</p>
         <p><strong>Views:</strong> {{ $albumData->views }}</p>
         <p><strong>Album has photos:</strong> {{ $albumData->album_photos_count }}</p>
 
@@ -192,6 +193,9 @@
 
             <p>{{ Form::label('placeTaken', 'Fotographed at') }}</p>
             <p>{{ Form::text('placeTaken', $albumData->album_place, array('class' => 'form-control')) }}</p>
+
+            <p>{{ Form::label('category', 'select category') }}</p>
+            <p>{{ Form::select('categories[]', $allExistingCategories, null, array('class' => 'form-control')) }}</p>
 
             <p>{{ Form::label('albumTitlePhoto', 'Title photo') }}</p>
             <p>{{ Form::file('albumTitlePhoto', array('class' => 'form-control')) }}</p>

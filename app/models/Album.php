@@ -184,8 +184,9 @@ class Album{
      * @param $fullDescription
      * @param $placeTaken
      * @param $titlePhotoFile
+     * @param $selectedCategories
      */
-    public function editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile){
+    public function editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories){
 
         DB::table('albums')
             ->where('album_id', $currentAlbumId)
@@ -196,6 +197,29 @@ class Album{
                     'album_place' => $placeTaken
                 )
             );
+
+        //add categories
+        $categoryAlreadyExist = DB::select('select * from album_categories where album_id = ?', array($currentAlbumId));
+        for($i = 0; $i < sizeOf($selectedCategories); $i++){
+            $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
+            if($catId && !$categoryAlreadyExist) {
+                DB::table('album_categories')->insert(
+                    array(
+                        'album_id' => $currentAlbumId,
+                        'category_id' => $catId[0]->category_id,
+                    )
+                );
+            } elseif($categoryAlreadyExist) {
+                DB::table('album_categories')
+                    ->where('album_id', $currentAlbumId)
+                    ->update(
+                    array(
+                        'album_id' => $currentAlbumId,
+                        'category_id' => $catId[0]->category_id,
+                    )
+                );
+            }
+        }
 
         if ($titlePhotoFile != null){
             $file = $titlePhotoFile;
@@ -568,5 +592,34 @@ class Album{
      */
     public function recentAlbums(){
         return DB::select('select * from albums order by albums.album_created_at DESC limit 5');
+    }
+
+    /**
+     * CATEGORIES
+     */
+
+    /**
+     * Gets album category data
+     *
+     * @param $albumId
+     * @return null
+     */
+    public function getCategoriesData($albumId){
+        $tagsIds = DB::select('select * FROM album_categories where album_id = ?', array($albumId));
+        $i = 0;
+        $tagId = null;
+        foreach ($tagsIds as $tag){
+            $tagId[$i++] = $tag->category_id;
+        }
+
+        $j = 0;
+        $albumData = null;
+        for($i = 0; $i < sizeOf($tagId); $i++){
+            $tagNames = DB::table('categories')->where('category_id', $tagId[$i])->get();
+            foreach ($tagNames as $tagName)
+                $albumData[$j++] = $tagName->category_name;
+        }
+
+        return $albumData;
     }
 }

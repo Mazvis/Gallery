@@ -13,11 +13,12 @@ class Albums{
      * @param $shortDescription
      * @param $fullDescription
      * @param $placeTaken
+     * @param $selectedCategories
      * @return \Illuminate\Http\RedirectResponse redirects page if success
      */
-    public function createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken){
+    public function createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories){
 
-        $success = DB::table('albums')->insert(
+        $insertedAlbumId = DB::table('albums')->insertGetId(
             array(
                 'album_name' => $albumName,
                 'album_short_description' => $shortDescription,
@@ -26,7 +27,21 @@ class Albums{
                 'user_id' => $currentUserId,
             )
         );
-        if($success)
+
+        //add categories
+        for($i = 0; $i < sizeOf($selectedCategories); $i++){
+            $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
+            if($catId) {
+                DB::table('album_categories')->insert(
+                    array(
+                        'album_id' => $insertedAlbumId,
+                        'category_id' => $catId[0]->category_id,
+                    )
+                );
+            }
+        }
+
+        if($insertedAlbumId != false)
             return Redirect::back();
     }
 

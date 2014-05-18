@@ -17,6 +17,9 @@
     <p>{{ Form::label('place', 'Fotographet place') }}</p>
     <p>{{ Form::text('place', null, array('class'=>'form-control')) }}</p>
 
+    <p>{{ Form::label('category', 'Select category') }}</p>
+    <p>{{ Form::select('categories[]', $allExistingCategories, null, array('class' => 'form-control')) }}</p>
+
     <p>{{ Form::submit('Create', array('class' => 'btn btn-success')) }}</p>
 
     {{ Form::token() }}

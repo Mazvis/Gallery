@@ -58,6 +58,7 @@ class AlbumController extends BaseController {
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $fullDescription = strip_tags(Input::get('fullDescription'));
                 $placeTaken = strip_tags(Input::get('placeTaken'));
+                $selectedCategories = Input::get('categories');
 
                 $titlePhotoFile = null;
                 if (Input::hasFile('albumTitlePhoto'))
@@ -65,7 +66,7 @@ class AlbumController extends BaseController {
 
                 $album = new Album;
 
-                return $album->editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile);
+                return $album->editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories);
             }
         }
         //return Redirect::to('albums/'.$currentAlbumId);
@@ -314,4 +315,18 @@ class AlbumController extends BaseController {
         return $album->recentAlbums();
     }
 
+    /**
+     * CATEGORIES
+     */
+
+    /**
+     * Gets photo category by album id
+     *
+     * @param $albumId
+     * @return mixed
+     */
+    public function getCategoriesData($albumId){
+        $album = new Album;
+        return $album->getCategoriesData($albumId);
+    }
 }
