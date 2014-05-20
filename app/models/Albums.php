@@ -28,8 +28,8 @@ class Albums{
             )
         );
 
-        //add categories
-        for($i = 0; $i < sizeOf($selectedCategories); $i++){
+        //add categories(if needed)
+        /*for($i = 0; $i < sizeOf($selectedCategories); $i++){
             $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
             if($catId) {
                 DB::table('album_categories')->insert(
@@ -39,7 +39,7 @@ class Albums{
                     )
                 );
             }
-        }
+        }*/
 
         if($insertedAlbumId != false)
             return Redirect::back();
