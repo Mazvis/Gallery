@@ -10,7 +10,7 @@
     @for ($i = 0; $i < sizeOf($photos); $i++)
     <div class="col-sm-6 col-md-4">
         <h3>{{ $photos[$i]->photo_name }}</h3>
-        <p>By: {{ HTML::link('albums/'.$photos[$i]->album_id, $photos[$i]->album_name) }} </p>
+        <p>Album: {{ HTML::link('albums/'.$photos[$i]->album_id, $photos[$i]->album_name) }} </p>
         <div class="thumbnail">
 
             <a href="{{ URL::to('albums/'.$photos[$i]->album_id.'/photo/'.$photos[$i]->photo_id) }}">

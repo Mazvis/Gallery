@@ -32,7 +32,7 @@
         <p><strong>Place:</strong> {{ $albumData->album_place }}</p>
         <p><strong>Created at:</strong> {{ $albumData->album_created_at }}</p>
         <p><strong>Album fool description:</strong> Album full description: {{ $albumData->album_full_description }}</p>
-        <p><strong>Creator:</strong> {{ HTML::link('user/'.$albumData->username, $albumData->username) }}</p>
+        <p><strong>Creator:</strong> {{ $albumData->username }}</p>
         <p><strong>Views:</strong> {{ $albumData->views }}</p>
         <p><strong>Album has photos:</strong> {{ $albumData->album_photos_count }}</p>
 
