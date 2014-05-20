@@ -201,8 +201,8 @@ class Album{
                 )
             );
 
-        //add categories
-        $categoryAlreadyExist = DB::select('select * from album_categories where album_id = ?', array($currentAlbumId));
+        //add categories(iff needed
+        /*$categoryAlreadyExist = DB::select('select * from album_categories where album_id = ?', array($currentAlbumId));
         for($i = 0; $i < sizeOf($selectedCategories); $i++){
             $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
             if($catId && !$categoryAlreadyExist) {
@@ -222,7 +222,7 @@ class Album{
                     )
                 );
             }
-        }
+        }*/
 
         if ($titlePhotoFile != null){
             $file = $titlePhotoFile;
