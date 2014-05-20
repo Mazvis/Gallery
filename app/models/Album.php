@@ -41,9 +41,12 @@ class Album{
 
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
+                if ($extension == 'jpeg') {
+                    $extension = 'jpg';
+                }
                 $fileSize = $file->getSize();
 
-                if($extension == 'jepg' || $extension == 'jpg' || $extension == 'bmp' || $extension == 'png' || $extension == 'gif')
+                if($extension == 'jpeg' || $extension == 'jpg' || $extension == 'bmp' || $extension == 'png' || $extension == 'gif')
                     if($fileSize <= 1024*1024*3){
                         //make: if this albumId exist in albums table do this insert
                         $isAlbumIdExist = DB::select('select album_id from albums where album_id = ?', array($currentAlbumId));
@@ -226,9 +229,12 @@ class Album{
 
             $filename = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
+            if ($extension == 'jpeg') {
+                $extension = 'jpg';
+            }
             $fileSize = $file->getSize();
 
-            if($extension == 'jepg' || $extension == 'jpg' || $extension == 'bmp' || $extension == 'png' || $extension == 'gif')
+            if($extension == 'jpeg' || $extension == 'jpg' || $extension == 'bmp' || $extension == 'png' || $extension == 'gif')
                 //max is 3MG
                 if($fileSize <= 1024*1024*3){
 
@@ -562,7 +568,7 @@ class Album{
     }
 
     /**
-     * @param $photos
+     * @param $albums
      * @return null
      */
     public function isAlbumsCreatorForAlbumsTemplate($albums){

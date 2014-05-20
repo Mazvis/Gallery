@@ -162,7 +162,7 @@
                 </div>
 
                 <address class="copyright">
-                    &copy; 2013 Mažvydas
+                    &copy; 2014, MAE
                 </address>
 
                 <div class="clear"></div>
