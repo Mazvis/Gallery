@@ -167,17 +167,19 @@
 
     //photo comment make
     $('body').delegate(".photo-comment-button", "click",function () {
-        $.ajax({
-            type: "POST",
-            url: '../../../comment-in-photo',
-            data: {
-                photoId: $('input[name="photoId"]').val(),
-                comment: $('textarea[name="comment"]').val()
-            }
-        }).done(function( msg ) {
-                //alert(msg);
-                window.location.reload();
+        if(($('textarea[name="comment"]').val() != "" || ($('textarea[name="comment"]').val().length <= 255)) ){
+            $.ajax({
+                type: "POST",
+                url: '../../../comment-in-photo',
+                data: {
+                    photoId: $('input[name="photoId"]').val(),
+                    comment: $('textarea[name="comment"]').val()
+                }
+            }).done(function( msg ){
+                        //alert(msg);
+                        window.location.reload();
             });
+        }
     });
 
     //photo comment delete
