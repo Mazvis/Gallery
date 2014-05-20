@@ -89,7 +89,6 @@ class HomeController extends BaseController {
 
             //categories
             $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
-            $this->layout->content->categories = $album->getCategoriesData($albumId);
 
             //roles
             $this->layout->content->isUserHavingPrivilegies = $album->isUserHavingPrivilegies($albumId);

@@ -600,32 +600,4 @@ class Album{
         return DB::select('select * from albums order by albums.album_created_at DESC limit 5');
     }
 
-    /**
-     * CATEGORIES
-     */
-
-    /**
-     * Gets album category data
-     *
-     * @param $albumId
-     * @return null
-     */
-    public function getCategoriesData($albumId){
-        $tagsIds = DB::select('select * FROM album_categories where album_id = ?', array($albumId));
-        $i = 0;
-        $tagId = null;
-        foreach ($tagsIds as $tag){
-            $tagId[$i++] = $tag->category_id;
-        }
-
-        $j = 0;
-        $albumData = null;
-        for($i = 0; $i < sizeOf($tagId); $i++){
-            $tagNames = DB::table('categories')->where('category_id', $tagId[$i])->get();
-            foreach ($tagNames as $tagName)
-                $albumData[$j++] = $tagName->category_name;
-        }
-
-        return $albumData;
-    }
 }

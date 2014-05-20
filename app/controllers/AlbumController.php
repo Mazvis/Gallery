@@ -315,19 +315,4 @@ class AlbumController extends BaseController {
         $album = new Album();
         return $album->recentAlbums();
     }
-
-    /**
-     * CATEGORIES
-     */
-
-    /**
-     * Gets photo category by album id
-     *
-     * @param $albumId
-     * @return mixed
-     */
-    public function getCategoriesData($albumId){
-        $album = new Album;
-        return $album->getCategoriesData($albumId);
-    }
 }
