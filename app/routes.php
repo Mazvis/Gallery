@@ -87,14 +87,14 @@ Route::get('login', 'HomeController@showLogin');
 
 // For login AJAX query
 Route::post('validate-login', array(
-    'uses' => 'RegistrationController@tryLogin',
+    'uses' => 'UserController@tryLogin',
     'as' => 'login.try'
 ));
 
 //forms
-Route::post('login-to-page', 'LoginController@authLogin');
+Route::post('login-to-page', 'UserController@authLogin');
 //logout
-Route::get('logout', 'LoginController@logout');
+Route::get('logout', 'UserController@logout');
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Show registration page
@@ -106,7 +106,7 @@ Route::get('/registration', array(
 
 // AJAX query for registration validation
 Route::post('validate-registration', array(
-    'uses' => 'RegistrationController@storeGet',
+    'uses' => 'UserController@storeGet',
     'as' => 'registration.store'
 ));
 
