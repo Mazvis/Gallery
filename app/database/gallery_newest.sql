@@ -24,6 +24,55 @@ USE `gallery`;
 
 -- --------------------------------------------------------
 
+
+--
+-- Table structure for table `logins`
+--
+
+CREATE TABLE IF NOT EXISTS `logins` (
+  `login_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `success` int(11) NOT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`login_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `searches`
+--
+
+CREATE TABLE IF NOT EXISTS `searches` (
+  `search_id` int(11) NOT NULL AUTO_INCREMENT,
+  `search` varchar(255) DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`search_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `user_actions`
+--
+
+CREATE TABLE IF NOT EXISTS `user_actions` (
+  `user_action_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `action` varchar(255) DEFAULT '',
+  `ip` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_action_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `subscribes`
+--
+
+CREATE TABLE IF NOT EXISTS `subscribes` (
+  `subscribe_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `subscribed_user_id` int(11) NOT NULL,
+  PRIMARY KEY (`subscribe_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 --
 -- Table structure for table `albums`
 --

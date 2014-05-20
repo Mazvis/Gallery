@@ -116,6 +116,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Mews\Phpthumb\PhpthumbServiceProvider',
+        'Chumper\Datatable\DatatableServiceProvider',
 	),
 
 	/*
@@ -180,6 +181,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+        'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 
 	),
 

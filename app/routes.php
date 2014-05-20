@@ -139,6 +139,9 @@ Route::get('user/{username}', 'HomeController@showUserProfile');
 // Show admin panel page
 /*--------------------------------------------------------------------------------------------------------------------*/
 Route::get('panel', 'HomeController@showPanel');
+Route::get('searches', 'AdminController@showSearches');
+Route::resource('searches', 'AdminController');
+Route::get('api/searches', array('as'=>'api.searches', 'uses'=>'AdminController@getSearchesDatatable'));
 
 // route for creating category
 Route::post('create-category', array(

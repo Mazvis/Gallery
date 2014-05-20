@@ -4,7 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*",
+		"laravel/framework": "v4.0.10",
 		"barryvdh/laravel-ide-helper": "1.*",
 
         "mews/phpthumb": "dev-master",
@@ -14,7 +14,8 @@
         "cartalyst/sentry": "2.0.*",
         "dflydev/markdown": "v1.0.2",
         "imagine/Imagine": "v0.4.1",
-        "phpunit/phpunit": "4.1.*"
+        "phpunit/phpunit": "4.1.*",
+        "chumper/datatable": "2.*"
 	},
 	"autoload": {
 		"classmap": [
