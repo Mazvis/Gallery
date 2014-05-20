@@ -59,7 +59,7 @@ class UserController extends BaseController {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout() {
-        $logout = new Login;
+        $logout = new User;
         return $logout->logout();
     }
 }

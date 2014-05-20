@@ -110,36 +110,6 @@ Route::post('validate-registration', array(
     'as' => 'registration.store'
 ));
 
-/*--------------------------------------------------------------------------------------------------------------------*/
-// Show user profile page
-/*--------------------------------------------------------------------------------------------------------------------*/
-Route::get('/profile', 'HomeController@showProfile');
-
-// model for user profile data editing
-Route::model('user', 'User');
-Route::post('profile/update/name/{user}', array(
-    'uses'=>'ProfileController@profileNamePost',
-    'as' => 'user.update.name'
-));
-Route::post('profile/update/email/{user}', array(
-    'uses'=>'ProfileController@profileEmailPost',
-    'as' => 'user.update.email'
-));
-Route::post('profile/update/password/{user}', array(
-    'uses'=>'ProfileController@profilePasswordPost',
-    'as' => 'user.update.password'
-));
-
-/*--------------------------------------------------------------------------------------------------------------------*/
-// Show single user profile page
-/*--------------------------------------------------------------------------------------------------------------------*/
-Route::get('user/{username}', 'HomeController@showUserProfile');
-
-/*--------------------------------------------------------------------------------------------------------------------*/
-// Show admin panel page
-/*--------------------------------------------------------------------------------------------------------------------*/
-Route::get('panel', 'HomeController@showPanel');
-
 // route for creating category
 Route::post('create-category', array(
     'uses'=>'PhotoController@createCategory',

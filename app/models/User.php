@@ -71,10 +71,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         if ($v->fails())
             $messages = $v->messages();
         else
-            if ($input['is_clicked'] == 'yes')
-                return self::saveUserToDatabase($input);
-            else
-                return "GOOD";
+        if ($input['is_clicked'] == 'yes')
+            return self::saveUserToDatabase($input);
+        else
+            return "GOOD";
 
         return $messages;
     }
@@ -116,7 +116,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function getUserName($userId) {
         $users = DB::table('users')->where('id', $userId)->get();
         $user = 'Unknown';
-        foreach($users as $user)
+        foreach ($users as $user)
             $username = $user->username;
         return $username;
     }
@@ -127,8 +127,35 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * @param $username
      * @return mixed
      */
-    public function getUserDataByUserName($username){
+    public function getUserDataByUserName($username) {
         return $users = DB::select('select * from users where username = ?', array($username));
+    }
+
+    /**
+     * checks user for signing in
+     *
+     * @param $username
+     * @param $password
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function auth($username, $password) {
+        // get POST data
+        $userdata = array(
+            'username' => $username,
+            'password' => $password
+        );
+
+        if (Auth::attempt($userdata)) {
+            return Redirect::back();
+        } else {
+            // auth failure, go back to the login
+            return Redirect::to('login')->with('login_errors', true);
+        }
+    }
+
+    public function logout() {
+        Auth::logout();
+        return Redirect::back();
     }
 
 }
