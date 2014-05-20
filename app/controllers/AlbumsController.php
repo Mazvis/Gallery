@@ -20,7 +20,7 @@ class AlbumsController extends BaseController {
                 $fullDescription = strip_tags(Input::get('description'));
                 $placeTaken = strip_tags(Input::get('place'));
                 //$selectedCategories = Input::get('categories');
-                $selectedCategories = ['Uncategorized'];
+                $selectedCategories = 'Uncategorized';
 
                 $albums = new Albums;
                 return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories);

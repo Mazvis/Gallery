@@ -59,7 +59,7 @@ class AlbumController extends BaseController {
                 $fullDescription = strip_tags(Input::get('fullDescription'));
                 $placeTaken = strip_tags(Input::get('placeTaken'));
                 //$selectedCategories = Input::get('categories');
-                $selectedCategories = ['Uncategorized'];
+                $selectedCategories = 'Uncategorized';
 
                 $titlePhotoFile = null;
                 if (Input::hasFile('albumTitlePhoto'))
