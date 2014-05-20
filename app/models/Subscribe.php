@@ -3,6 +3,6 @@
 /**
  * Class Subscribe
  */
-class Album{
-    
+class Subscribe{
+
 }
