@@ -34,7 +34,7 @@
         <p><strong>Place taken:</strong>  {{ $photoData->photo_taken_at }}</p>
         <p><strong>Created at:</strong>  {{ $photoData->photo_created_at }}</p>
         <p><strong>Photo description:</strong>  {{ $photoData->photo_short_description }}</p>
-        <p><strong>Author:</strong>  {{ HTML::link('user/'.$photoData->username, $photoData->username) }}</p>
+        <!--<p><strong>Author:</strong>  {{ HTML::link('user/'.$photoData->username, $photoData->username) }}</p>-->
         <p><strong>Photo tags:</strong>  @for ($i = 0; $i < sizeOf($photoTagNames); $i++) {{ HTML::link('tag/'.$photoTagNames[$i], $photoTagNames[$i]) }}@if($i < sizeOf($photoTagNames)-2), @endif @endfor</p>
         <p><strong>Views:</strong>  {{ $photoData->views }}</p>
 

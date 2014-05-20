@@ -19,7 +19,8 @@ class AlbumsController extends BaseController {
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $fullDescription = strip_tags(Input::get('description'));
                 $placeTaken = strip_tags(Input::get('place'));
-                $selectedCategories = Input::get('categories');
+                //$selectedCategories = Input::get('categories');
+                $selectedCategories = 'Uncategorized';
 
                 $albums = new Albums;
                 return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories);
