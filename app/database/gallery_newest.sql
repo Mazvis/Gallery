@@ -348,6 +348,20 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `name`, `last_name`,
 (109, 'kauko', '$2y$08$wnPEmT5yEoV61FVINPeZKudmTm6fuJL.FT2/Xvdm8Kc9iR7qDTWIC', 'dddd@gmail.com', 'Dddddd', 'Ddddd', '2013-12-04 21:17:11', '2013-12-04 21:17:11', 2),
 (110, 'usernamas', '$2y$08$D5iQB9sBKtUHJXqyf/oQM.5NWHIXyzrPXlQFdWF9SDeFEcnGAy7Ma', 'asasas@elpastas.lt', 'Labas', 'Tabas', '2013-12-06 18:24:15', '2013-12-06 18:24:15', 2);
 
+--
+-- Sukurta duomenų struktūra lentelei `user_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `user_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `key` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
