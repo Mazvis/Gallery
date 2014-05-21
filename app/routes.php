@@ -159,3 +159,8 @@ Route::post('delete-category', array(
     'uses'=>'PhotoController@deleteCategory',
     'as' => 'delete.category'
 ));
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+// Show not found page
+/*--------------------------------------------------------------------------------------------------------------------*/
+Route::get('/404', 'HomeController@showNotFoundPage');
