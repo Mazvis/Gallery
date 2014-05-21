@@ -27,7 +27,7 @@ class AlbumController extends BaseController {
                 $selectedCategories = Input::get('categories');
                 $writtenTags = Input::get('tagsToAdd');
 
-                $photoFiles = null;
+                $photoFiles = [];
                 if (Input::hasFile('photos'))
                     $photoFiles = Input::file('photos');
 

@@ -25,8 +25,10 @@ class Album{
      */
     public function uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFile, $titlePhoto){
 
+        $insertedPhotoId = 'nothing to upload';
+
         // upload photo to server
-        if ($photoFile != null){
+        if (!empty($photoFile)){
 
             foreach($photoFile as $file) {
                 $destinationPath = 'uploads/albums/'.$currentAlbumId;
