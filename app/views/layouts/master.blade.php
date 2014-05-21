@@ -69,7 +69,7 @@
                     <ul class="nav navbar-nav">
                         <li class="@if(Request::is('/'))active@endif">{{ HTML::link('/', 'Home') }}</li>
                         <li class="@if(Request::is('albums')){{'active'}}@else{{' '}}@endif">{{ HTML::link('/albums', 'Albums') }}</li>
-                        @if(Auth::check())
+                        @if(Auth::check() && Auth::user()->role_id == 1)
                         <li class="dropdown @if(Request::is('panel')){{'active'}}@else{{' '}}@endif">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">user panel<b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -78,8 +78,8 @@
                                 @if(Auth::user()->role_id == 1)<li class="admin-panel-li"><a href="{{ URL::to('searches') }}">Search history</a></li>@endif
                             </ul>
                         </li>
-                        @else
-                        <li class="@if(Request::is('registration')){{'active'}}@else{{' '}}@endif">{{ HTML::link('registration', 'Register') }}</li>
+                        @elseif(!Auth::check())
+                            <li class="@if(Request::is('registration')){{'active'}}@else{{' '}}@endif">{{ HTML::link('registration', 'Register') }}</li>
                         @endif
                     </ul>
 
