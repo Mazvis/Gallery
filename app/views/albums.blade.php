@@ -15,7 +15,10 @@
     <p>{{ Form::text('description', null, array('class'=>'form-control')) }}</p>
 
     <p>{{ Form::label('place', 'Fotographet place') }}</p>
-    <p>{{ Form::text('place', null, array('class'=>'form-control')) }}</p>
+    <p>{{ Form::text('place', null, array('class'=>'form-control')) }}</    p>
+
+    <p>{{ Form::label('albumModerators', 'Add moderators') }}</p>
+    <p>{{ Form::select('categories[]', [1,2,5], null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
 
     <p>{{ Form::submit('Create', array('class' => 'btn btn-success')) }}</p>
 

@@ -196,6 +196,12 @@
             <p>{{ Form::label('albumTitlePhoto', 'Title photo') }}</p>
             <p>{{ Form::file('albumTitlePhoto', array('class' => 'form-control')) }}</p>
 
+            <p>{{ Form::label('albumModerators', 'Add more moderators') }}</p>
+            <p>{{ Form::select('categories[]', [1,2,5], null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+
+            <p>{{ Form::label('albumModerators', 'Delete current moderators') }}</p>
+            <p>{{ Form::select('categories[]', [1,2,5,78,7], null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+
             <p>{{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}</p>
 
             {{ Form::token() }}
