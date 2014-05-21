@@ -22,8 +22,10 @@ class AlbumsController extends BaseController {
                 //$selectedCategories = Input::get('categories');
                 $selectedCategories = 'Uncategorized';
 
+                $moderators = Input::get('albumModerators');
+
                 $albums = new Albums;
-                return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories);
+                return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories, $moderators);
             }
         }
         return Redirect::back();
@@ -55,6 +57,11 @@ class AlbumsController extends BaseController {
             }
             return $array;
         }
+    }
+
+    public function getAllOthersUsers($currentUserId) {
+        $albums = new Albums();
+        return $albums->getAllOthersUsers($currentUserId);
     }
 
 }

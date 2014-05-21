@@ -55,6 +55,12 @@ class HomeController extends BaseController {
         //categories
         $photo = new PhotoController();
         $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
+
+        //moderators
+        $this->layout->content->allOtherUsers = [];
+        if (Auth::check()) {
+            $this->layout->content->allOtherUsers = $albums->getAllOthersUsers(Auth::user()->id);
+        }
     }
 
     /**
