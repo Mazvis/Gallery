@@ -149,6 +149,11 @@ Route::get('searches', 'AdminController@showSearches');
 Route::resource('searches', 'AdminController');
 Route::get('api/searches', array('as'=>'api.searches', 'uses'=>'AdminController@getSearchesDatatable'));
 
+Route::get('logins', 'AdminController@showLogins');
+Route::post('logins', 'AdminController@showLogins');
+Route::resource('logins', 'AdminController');
+Route::get('api/logins', array('as'=>'api.logins', 'uses'=>'AdminController@getLoginsDatatable'));
+
 // route for creating category
 Route::post('create-category', array(
     'uses'=>'PhotoController@createCategory',
