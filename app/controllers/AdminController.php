@@ -1,5 +1,8 @@
 <?php
 
+use Chumper\Datatable\Datatable;
+use Chumper\Datatable\Engines\CollectionEngine;
+
 class AdminController extends BaseController {
 
     /*
@@ -18,10 +21,10 @@ class AdminController extends BaseController {
 
     public function getSearchesDatatable()
     {
-        return Datatable::collection(Search::all(array('search_id','search','created_at')))
+        return (new CollectionEngine(Search::all(array('search_id','search','created_at'))))
         ->showColumns('search', 'created_at')
         ->searchColumns('search')
-        ->orderColumns('search_id')
+//        ->orderColumns('search_id')
         ->make();
     }
 }

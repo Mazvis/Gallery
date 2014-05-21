@@ -10,6 +10,8 @@ class Search extends Eloquent
      * @var string
      */
     protected $table = 'searches';
+    
+    public $timestamps = false;
 
 
 }
