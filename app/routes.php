@@ -110,6 +110,12 @@ Route::post('validate-registration', array(
     'as' => 'registration.store'
 ));
 
+// AJAX query for user settings changing
+Route::post('validate-settings', array(
+    'uses' => 'UserController@changeSettings',
+    'as' => 'user.settings'
+));
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Show user profile page
 /*--------------------------------------------------------------------------------------------------------------------*/

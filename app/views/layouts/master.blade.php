@@ -21,6 +21,10 @@
     {{ HTML::script('assets/bootstrap-3.0.0/assets/js/html5shiv.js') }}
     {{ HTML::script('assets/bootstrap-3.0.0/assets/js/respond.min.js') }}
     <![endif]-->
+    
+    @if (isset($userColor))
+    <style>body { color: {{ $userColor }}; background: {{ $userColor }} }</style>
+    @endif
 
 </head>
 

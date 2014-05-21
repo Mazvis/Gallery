@@ -21,6 +21,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * @var array
      */
     protected $hidden = array('password');
+    
+    /**
+     * The database table for user settings.
+     *
+     * @var string
+     */
+    protected $settingsTable = 'user_settings';
 
     /**
      * Get the unique identifier for the user.
@@ -77,6 +84,39 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             return "GOOD";
 
         return $messages;
+    }
+    
+    /**
+     * Get user background and font color
+     *
+     * @return color or message about default background
+     */
+    public function getUserSettings($userID){        
+        return DB::table($this->settingsTable)->where('user_id', $userID)->pluck('value');
+    }
+
+    /**
+     * Check settings field
+     *
+     * @return message about success or error
+     */
+    public function validateSettings($input, $userID) {
+        $settingsColor = $input['color'];
+        $userSettings = DB::table($this->settingsTable)->where('user_id', $userID)->first();
+
+        if ($settingsColor != "default") {
+            if (!empty($userSettings))
+                DB::table($this->settingsTable)
+                        ->where('user_id', $userID)
+                        ->update(array('key' => 'color', 'value' => $settingsColor));
+            else
+                DB::table($this->settingsTable)->insertGetId(
+                        array('user_id' => $userID, 'key' => 'color', 'value' => $settingsColor));
+        }else{
+            DB::table($this->settingsTable)->where('user_id', '=', $userID)->delete();
+        }
+
+        return 'Settings changed successfully!';
     }
 
     /**

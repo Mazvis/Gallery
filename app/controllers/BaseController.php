@@ -43,6 +43,12 @@ class BaseController extends Controller {
             if($mostViewedPhoto)
                 $mostViewedPhoto = $mostViewedPhoto[0];
             $this->layout->mostViewedPhoto = $mostViewedPhoto;
+            
+            if(Auth::check()){
+                $user = new User();
+                $userColor = $user->getUserSettings(Auth::user()->id);
+                $this->layout->userColor = $userColor;
+            }
         }
     }
 

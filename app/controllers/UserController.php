@@ -62,4 +62,15 @@ class UserController extends BaseController {
         $logout = new User;
         return $logout->logout();
     }
+    
+    /**
+     * Change user settings
+     *
+     */
+    public function changeSettings(){
+        $user = new User;
+        $input = Input::all();
+        $msg = $user->validateSettings($input, Auth::user()->id);
+        return Redirect::to('/')->with('changeSettingsStatus', $msg);
+    }
 }
