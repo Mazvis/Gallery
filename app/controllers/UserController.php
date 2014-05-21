@@ -22,10 +22,24 @@ class UserController extends BaseController {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function tryLogin() {
+        $login = new Login();
+        $login->ip = Request::getClientIp();
+        $user = User::where('username', '=', Input::get('username'))->first();
+        if ($user) {
+            $login->user_id = $user->id;
+        }
         if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))) {
+            if ($user) {
+                $login->success = true;
+                $login->save();
+            }
             //return Redirect::intended('/');
             return Redirect::back();
         }else{
+            if ($user) {
+                $login->success = false;
+                $login->save();
+            }
             return Redirect::to('/login')->with('tried_login', Input::get('username'));
         }
     }

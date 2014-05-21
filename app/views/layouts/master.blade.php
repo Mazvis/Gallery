@@ -75,7 +75,8 @@
                             <ul class="dropdown-menu">
                                 {{-- <li><a href="{{ URL::to('profile') }}">Profile</a></li>
                                 @if(Auth::user()->role_id == 1)<li class="admin-panel-li"><a href="{{ URL::to('panel') }}">Admin panel</a></li>@endif --}}
-                                @if(Auth::user()->role_id == 1)<li class="admin-panel-li"><a href="{{ URL::to('searches') }}">Search history</a></li>@endif
+                                <li class="admin-panel-li"><a href="{{ URL::to('searches') }}">Search history</a></li>
+                                <li class="admin-panel-li"><a href="{{ URL::to('logins') }}">Login attempts history</a></li>
                             </ul>
                         </li>
                         @elseif(!Auth::check())

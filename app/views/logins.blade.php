@@ -2,6 +2,6 @@
 <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
 
 {{ Datatable::table()
-->addColumn('Search phrase', 'Date')       // these are the column headings to be shown
-->setUrl(route('api.searches'))   // this is the route where data will be retrieved
+->addColumn('IP', 'Login attempt', 'Date')       // these are the column headings to be shown
+->setUrl(route('api.logins'))   // this is the route where data will be retrieved
 ->render() }}
