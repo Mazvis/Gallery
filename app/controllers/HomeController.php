@@ -184,6 +184,12 @@ class HomeController extends BaseController {
     public function showSearchPage($tagName) {
         $photo = new PhotoController();
 
+        if ($tagName) {
+            $search = new Search;
+            $search->search = $tagName;
+            $search->save();
+        }
+
         $photos = $photo->getPhotosByTagName($tagName);
 
         $this->layout->content = View::make('tag', array('tagName' => $tagName));
