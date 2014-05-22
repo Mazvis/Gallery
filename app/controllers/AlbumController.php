@@ -65,9 +65,12 @@ class AlbumController extends BaseController {
                 if (Input::hasFile('albumTitlePhoto'))
                     $titlePhotoFile = Input::file('albumTitlePhoto');
 
-                $album = new Album;
+                $moreModeratorsToAdd = Input::get('moreModeratorsToAdd');
 
-                return $album->editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories);
+                $moderatorsToDelete = Input::get('moderatorsToDelete');
+
+                $album = new Album;
+                return $album->editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories, $moreModeratorsToAdd, $moderatorsToDelete);
             }
         }
         //return Redirect::to('albums/'.$currentAlbumId);

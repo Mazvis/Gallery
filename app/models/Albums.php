@@ -30,30 +30,14 @@ class Albums{
         );
 
         //add moderators
-        /*foreach($moderators as $i => $moderator)
-            $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
-            if($catId) {
-                DB::table('album_categories')->insert(
-                    array(
-                        'album_id' => $insertedAlbumId,
-                        'category_id' => $catId[0]->category_id,
-                    )
-                );
-            }
-        }*/
-
-        //add categories(if needed)
-        /*for($i = 0; $i < sizeOf($selectedCategories); $i++){
-            $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
-            if($catId) {
-                DB::table('album_categories')->insert(
-                    array(
-                        'album_id' => $insertedAlbumId,
-                        'category_id' => $catId[0]->category_id,
-                    )
-                );
-            }
-        }*/
+        foreach($moderators as $i) {
+            $isAdded = DB::table('album_moderators')->insert(
+                array(
+                    'album_id' => $insertedAlbumId,
+                    'user_id' => $i,
+                )
+            );
+        }
 
         if($insertedAlbumId != false)
             return Redirect::back();

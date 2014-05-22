@@ -190,8 +190,10 @@ class Album{
      * @param $placeTaken
      * @param $titlePhotoFile
      * @param $selectedCategories
+     * @param $moreModeratorsToAdd
+     * @param $moderatorsToDelete
      */
-    public function editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories){
+    public function editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories, $moreModeratorsToAdd, $moderatorsToDelete){
 
         DB::table('albums')
             ->where('album_id', $currentAlbumId)
@@ -202,6 +204,35 @@ class Album{
                     'album_place' => $placeTaken
                 )
             );
+
+        //add more moderators
+        if ($moreModeratorsToAdd != null && !empty($moreModeratorsToAdd)){
+            foreach($moreModeratorsToAdd as $i) {
+                $isAdded = DB::table('album_moderators')->insert(
+                    array(
+                        'album_id' => $currentAlbumId,
+                        'user_id' => $i,
+                    )
+                );
+            }
+        }
+
+        $file = fopen("test.txt","w");
+        if($moderatorsToDelete != null){
+            foreach($moderatorsToDelete as $id){
+                fwrite($file,$id."\n");
+            }
+        } else {
+            fwrite($file,"null");
+        }
+        fclose($file);
+        //delete current moderators
+        if ($moderatorsToDelete != null && !empty($moderatorsToDelete)){
+            foreach($moderatorsToDelete as $i) {
+                DB::delete('DELETE FROM album_moderators WHERE album_id = ? AND user_id = ?', array($currentAlbumId, $i));
+            }
+        }
+
 
         //add categories(iff needed
         /*$categoryAlreadyExist = DB::select('select * from album_categories where album_id = ?', array($currentAlbumId));

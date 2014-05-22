@@ -318,3 +318,7 @@ body.register-page form {
     width: 800px;
     max-width: 100%;
 }
+
+.display-none{
+    display: none;
+}

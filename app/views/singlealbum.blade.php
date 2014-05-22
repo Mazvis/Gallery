@@ -203,10 +203,17 @@
             <p>{{ Form::text('placeTaken', $albumData->album_place, array('class' => 'form-control')) }}</p>
 
             <p>{{ Form::label('moreModeratorsToAdd', 'Add more moderators') }}</p>
+            @if (!empty($usersLeft))
             <p>{{ Form::select('moreModeratorsToAdd[]', $usersLeft, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+            @else
+            <p>All users are moderators</p>
+            <p class="display-none">{{ Form::select('moreModeratorsToAdd[]', $usersLeft, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+            @endif
 
+            @if (!empty($albumModerators))
             <p>{{ Form::label('moderatorsToDelete', 'Delete current moderators') }}</p>
             <p>{{ Form::select('moderatorsToDelete[]', $albumModerators, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+            @endif
 
             <p>{{ Form::label('albumTitlePhoto', 'Title photo') }}</p>
             <p>{{ Form::file('albumTitlePhoto', array('class' => 'form-control')) }}</p>

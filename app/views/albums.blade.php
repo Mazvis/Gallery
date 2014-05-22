@@ -18,7 +18,7 @@
     <p>{{ Form::text('place', null, array('class'=>'form-control')) }}</    p>
 
     <p>{{ Form::label('albumModerators', 'Add moderators') }}</p>
-    <p>{{ Form::select('moderators[]', $allOtherUsers, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+    <p>{{ Form::select('albumModerators[]', $allOtherUsers, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
 
     <p>{{ Form::submit('Create', array('class' => 'btn btn-success')) }}</p>
 

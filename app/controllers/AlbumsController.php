@@ -22,9 +22,10 @@ class AlbumsController extends BaseController {
                 //$selectedCategories = Input::get('categories');
                 $selectedCategories = 'Uncategorized';
 
+                $moderators = [];
                 $moderators = Input::get('albumModerators');
 
-                $albums = new Albums;
+                $albums = new Albums();
                 return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories, $moderators);
             }
         }
