@@ -47,7 +47,7 @@
                     {{ HTML::image('assets/img/no-image-thumb.jpg', $photo_data_array2[$i]->photo_short_description, array('width' => '200', 'height' => '200')) }}
                     @endif
                 </a>
-                @if(Auth::check() && $isPhotoCreator[$i])
+                @if(Auth::check() && ($isPhotoCreator[$i] || $albumsModel->isUserAlbumPhotoModerator($photo_data_array2[$i]->photo_id, Auth::user()->id)))
                 <div class="caption photo-link" data-id="{{ $photo_data_array2[$i]->photo_id }}">
                     <p>Album: {{ HTML::link('albums/'.$photo_data_array2[$i]->album_id.'/photo/'.$photo_data_array2[$i]->photo_id, $photo_data_array2[$i]->album_name) }} </p>
                     <p>

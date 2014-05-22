@@ -217,15 +217,6 @@ class Album{
             }
         }
 
-        $file = fopen("test.txt","w");
-        if($moderatorsToDelete != null){
-            foreach($moderatorsToDelete as $id){
-                fwrite($file,$id."\n");
-            }
-        } else {
-            fwrite($file,"null");
-        }
-        fclose($file);
         //delete current moderators
         if ($moderatorsToDelete != null && !empty($moderatorsToDelete)){
             foreach($moderatorsToDelete as $i) {

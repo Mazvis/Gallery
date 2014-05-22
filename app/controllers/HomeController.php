@@ -28,6 +28,8 @@ class HomeController extends BaseController {
         $this->layout->content->photo_data_array2 = $photo->getAllPhotoData();
 
         $this->layout->content->isPhotoCreator = $photo->isPhotoCreatorForPhotos();
+
+        $this->layout->content->albumsModel = new Albums();
     }
 
     /**
@@ -60,6 +62,7 @@ class HomeController extends BaseController {
         $this->layout->content->allOtherUsers = [];
         if (Auth::check()) {
             $this->layout->content->allOtherUsers = $albums->getAllOthersUsers(Auth::user()->id);
+            $this->layout->content->albumsController = $albums;
         }
     }
 
@@ -106,8 +109,10 @@ class HomeController extends BaseController {
             $this->layout->content->albumModerators = $albums->getAllAlbumModerators($albumId);
 
             $this->layout->content->usersLeft = [];
-            if (Auth::check())
+            if (Auth::check()){
                 $this->layout->content->usersLeft = $albums->showAllLeftUsers(Auth::user()->id, $albumId);
+                $this->layout->content->isUserAlbumModerator = $albums->isUserAlbumModerator($albumId, Auth::user()->id);
+            }
         }
         else
             $this->showNotFoundPage();
@@ -150,6 +155,10 @@ class HomeController extends BaseController {
             $this->layout->content->comments = $photo->getPhotoComments($photoId);
 
             $this->layout->content->isPhotoCreator = $photo->isUserPhotoCreator($photoId);
+
+            //moderators
+            $this->layout->content->albumsModel = new Albums();
+            $this->layout->content->pagePhotoId = $photoId;
         }
         else
             $this->showNotFoundPage();
@@ -190,6 +199,9 @@ class HomeController extends BaseController {
 
         $photoM = new Photo();
         $this->layout->content->isPhotoCreator = $photoM->isPhotoCreatorForPhotosTemplate($photos);
+
+        //moderators
+        $this->layout->content->albumsModel = new Albums();
     }
 
     /*

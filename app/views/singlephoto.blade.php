@@ -38,7 +38,7 @@
         <p><strong>Photo tags:</strong>  @for ($i = 0; $i < sizeOf($photoTagNames); $i++) {{ HTML::link('tag/'.$photoTagNames[$i], $photoTagNames[$i]) }}@if($i < sizeOf($photoTagNames)-2), @endif @endfor</p>
         <p><strong>Views:</strong>  {{ $photoData->views }}</p>
 
-        @if(Auth::check() && $isPhotoCreator == 1)
+        @if(Auth::check() && ($isPhotoCreator == 1 || $albumsModel->isUserAlbumPhotoModerator($photoData->photo_id, Auth::user()->id)))
         <div data-photoid="{{ $photoData->photo_id }}">
             <button id="delete-single-photo" class="btn btn-danger">
                 <i class="glyphicon glyphicon-trash"></i>
@@ -102,7 +102,9 @@
 <div class="tabs">
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#comment-in-album-tab" data-toggle="tab">Comment</a></li>
-        @if(Auth::check() && $isPhotoCreator == 1)<li class=""><a href="#edit-album-tab" data-toggle="tab">Edit</a></li>@endif
+        @if(Auth::check() && ($isPhotoCreator == 1 || $albumsModel->isUserAlbumPhotoModerator($pagePhotoId, Auth::user()->id)))
+        <li class=""><a href="#edit-album-tab" data-toggle="tab">Edit</a></li>
+        @endif
     </ul>
     <div id="myTabContent" class="tab-content">
 
@@ -152,7 +154,7 @@
             </div>
 
         </div>
-        @if(Auth::check() && $isPhotoCreator == 1)
+        @if(Auth::check() && ($isPhotoCreator == 1 || $albumsModel->isUserAlbumPhotoModerator($pagePhotoId, Auth::user()->id)))
         <div class="tab-pane fade" id="edit-album-tab">
             {{ Form::open(array('files'=> true, 'method' => 'post', 'id' => 'edit-photo-data-form', 'class' => 'form-hidden')) }}
 

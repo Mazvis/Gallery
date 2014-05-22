@@ -20,7 +20,7 @@
                 {{ HTML::image('assets/img/no-image-thumb.jpg', $photos[$i]->photo_short_description, array('width' => '200', 'height' => '200')) }}
                 @endif
             </a>
-            @if(Auth::check() && $isPhotoCreator[$i])
+            @if(Auth::check() && ($isPhotoCreator[$i] || $albumsModel->isUserAlbumPhotoModerator($photos[$i]->photo_id, Auth::user()->id) ))
             <div id="delete-photo-data" class="caption photo-link" data-id="{{ $photos[$i]->photo_id }}">
                 <p>{{ $photos[$i]->photo_short_description }} </p>
                 <p>

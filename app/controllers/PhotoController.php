@@ -18,9 +18,13 @@ class PhotoController extends BaseController {
 
         if(Auth::check()){
             $photo = new Photo();
+            $albums = new Albums();
             $currentUserID = Auth::user()->id;
             $currentPhotoId = strip_tags(Input::get('photoId'));
-            if($photo->isUserPhotoCreator($currentUserID, $currentPhotoId) || Auth::user()->role_id == 1){
+            if($photo->isUserPhotoCreator($currentUserID, $currentPhotoId)
+                || Auth::user()->role_id == 1
+                || $albums->isUserAlbumPhotoModerator($currentPhotoId, $currentUserID)
+            ){
 
                 $currentAlbumId = strip_tags(Input::get('albumId'));
                 $selectedCategories = Input::get('categories');
@@ -77,9 +81,13 @@ class PhotoController extends BaseController {
 
         if(Auth::check()){
             $photo = new Photo();
+            $albums = new Albums();
             $currentUserID = Auth::user()->id;
             $currentPhotoId = strip_tags(Input::get('photoId'));
-            if($photo->isUserPhotoCreator($currentUserID, $currentPhotoId) || Auth::user()->role_id == 1){
+            if($photo->isUserPhotoCreator($currentUserID, $currentPhotoId)
+                || Auth::user()->role_id == 1
+                || $albums->isUserAlbumPhotoModerator($currentPhotoId, $currentUserID)
+            ){
                 return $photo->deletePhoto($currentPhotoId);
                 //return Redirect::to('albums/'.$currentAlbumId);
             }

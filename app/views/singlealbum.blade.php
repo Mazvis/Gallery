@@ -45,7 +45,7 @@
         <p><strong>Views:</strong> {{ $albumData->views }}</p>
         <p><strong>Album has photos:</strong> {{ $albumData->album_photos_count }}</p>
 
-        @if($isUserHavingPrivilegies)
+        @if($isUserHavingPrivilegies || $isUserAlbumModerator)
         {{ Form::submit('Delete album', array('class' => 'btn btn-danger', 'data-toggle' => 'modal', 'data-target' => '#deleteAlbumModal')) }}
 
         <!-- Modal -->
@@ -129,10 +129,8 @@
 <div class="tabs">
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#comment-in-album-tab" data-toggle="tab">Comment</a></li>
-        @if($isUserAlbumCreator)
-            <li class=""><a href="#edit-album-tab" data-toggle="tab">Edit</a></li>
-        @endif
-        @if($isUserAlbumCreator)
+        @if($isUserAlbumCreator || $isUserAlbumModerator)
+        <li class=""><a href="#edit-album-tab" data-toggle="tab">Edit</a></li>
         <li class=""><a href="#upload-in-album-tab" data-toggle="tab">Upload</a></li>
         @endif
     </ul>
@@ -184,7 +182,7 @@
             </div>
 
         </div>
-        @if($isUserAlbumCreator)
+        @if($isUserAlbumCreator || $isUserAlbumModerator)
         <div class="tab-pane fade" id="edit-album-tab">
             {{ Form::open(array('files'=> true, 'method' => 'post', 'id' => 'edit-album-data-form', 'class' => 'form-hidden')) }}
 
@@ -223,8 +221,6 @@
             {{ Form::token() }}
             {{ Form::close() }}
         </div>
-        @endif
-        @if($isUserAlbumCreator)
         <div class="tab-pane fade" id="upload-in-album-tab">
             {{ Form::open(array('files'=> true, 'method' => 'post', 'id' => 'upload-photos-to-album-form', 'class' => 'form-hidden')) }}
 
@@ -286,10 +282,10 @@
             <div class="caption photo-link" data-id="{{ $albumPhotos[$i]->photo_id }}">
                 <p>{{ $albumPhotos[$i]->photo_short_description }} </p>
                 <p>
-                    @if($isUserAlbumCreator)
+                    @if($isUserAlbumCreator || $isUserAlbumModerator)
                     {{ HTML::link(URL::to('albums/'.$albumPhotos[$i]->album_id.'/photo/'.$albumPhotos[$i]->photo_id), 'Edit', array('class' => 'btn btn-primary', 'role' => 'button')) }}
                     @endif
-                    @if($isUserHavingPrivilegies)
+                    @if($isUserHavingPrivilegies || $isUserAlbumModerator)
                     {{ Form::submit('Delete', array('id' => 'delete-photo', 'class' => 'btn btn-danger')) }}
                     @endif
                 </p>

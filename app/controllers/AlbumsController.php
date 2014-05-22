@@ -102,4 +102,10 @@ class AlbumsController extends BaseController {
         return $all;
     }
 
+    public function isUserAlbumModerator($albumId, $userId){
+        $albums = new Albums();
+        return $albums->isUserAlbumModerator($albumId, $userId);
+    }
+
+
 }

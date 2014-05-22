@@ -90,6 +90,19 @@ class Albums{
         return $sUsers;
     }
 
+    public function isUserAlbumModerator($albumId, $userId){
+        $isMod = DB::select('select * FROM album_moderators WHERE album_id = ? AND user_id = ?', array($albumId, $userId));
+        if($isMod != false ){
+            return true;
+        }
+        return false;
+    }
 
+    public function isUserAlbumPhotoModerator($photoId, $userId){
+        $albumId = DB::select('select * FROM photos WHERE photo_id = ?', array($photoId));
+        $albumId = $albumId[0]->album_id;
+
+        return $this->isUserAlbumModerator($albumId, $userId);
+    }
 
 }

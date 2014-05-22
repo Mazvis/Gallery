@@ -19,8 +19,12 @@ class AlbumController extends BaseController {
 
         if(Auth::check()){
             $album = new Album();
+            $albums = new Albums();
             $currentUserID = Auth::user()->id;
-            if($album->isUserAlbumCreator($currentUserID, $currentAlbumId) || Auth::user()->role_id == 1){
+            if($album->isUserAlbumCreator($currentUserID, $currentAlbumId)
+                || Auth::user()->role_id == 1
+                || $albums->isUserAlbumModerator($currentAlbumId, $currentUserID)
+            ){
                 $photoName = strip_tags(Input::get('photoName'));
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $placeTaken = strip_tags(Input::get('placeTaken'));
@@ -51,9 +55,12 @@ class AlbumController extends BaseController {
 
         if(Auth::check()){
             $album = new Album();
+            $albums = new Albums();
             $currentUserID = Auth::user()->id;
-            if($album->isUserAlbumCreator($currentUserID, $currentAlbumId) || Auth::user()->role_id == 1){
-
+            if($album->isUserAlbumCreator($currentUserID, $currentAlbumId)
+                || Auth::user()->role_id == 1
+                || $albums->isUserAlbumModerator($currentAlbumId, $currentUserID)
+            ){
                 $albumName = strip_tags(Input::get('albumName'));
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $fullDescription = strip_tags(Input::get('fullDescription'));
@@ -117,7 +124,11 @@ class AlbumController extends BaseController {
             $currentUserID = Auth::user()->id;
             $photoId = strip_tags(Input::get('photoId'));
             $photo = new Photo();
-            if($photo->isUserPhotoCreator($currentUserID, $photoId) || Auth::user()->role_id == 1){
+            $albums = new Albums();
+            if($photo->isUserPhotoCreator($currentUserID, $photoId)
+                || Auth::user()->role_id == 1
+                || $albums->isUserAlbumPhotoModerator($photoId, $currentUserID)
+            ){
                 $album = new Album();
                 return $album->deletePhoto($photoId);
             }
@@ -136,7 +147,11 @@ class AlbumController extends BaseController {
             $currentUserID = Auth::user()->id;
             $albumId = strip_tags(Input::get('albumId'));
             $album = new Album();
-            if($album->isUserAlbumCreator($currentUserID, $albumId) || Auth::user()->role_id == 1){
+            $albums = new Albums();
+            if($album->isUserAlbumCreator($currentUserID, $albumId)
+                || Auth::user()->role_id == 1
+                || $albums->isUserAlbumModerator($albumId, $currentUserID)
+            ){
 
                 return $album->deleteAlbum($albumId);
             }

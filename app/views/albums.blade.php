@@ -43,7 +43,7 @@
                 {{ HTML::image('assets/img/NoAlbumArt.jpg', $allAlbums[$i]->album_short_description, array('width' => '200', 'height' => '200')) }}
                 @endif
             </a>
-            @if(Auth::check() && $isAlbumCreator[$i] == 1)
+            @if(Auth::check() && ($isAlbumCreator[$i] == 1 || $albumsController->isUserAlbumModerator($allAlbums[$i]->album_id, Auth::user()->id)))
             <div class="caption photo-link" data-id="{{ $allAlbums[$i]->album_id }}">
                 <p>{{ $allAlbums[$i]->album_short_description }} </p>
                 <p id="delete-album-data" data-albumid="{{ $allAlbums[$i]->album_id }}">

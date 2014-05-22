@@ -14,7 +14,7 @@
                 @endif
             </a>
 
-            @if(Auth::check() && $isPhotoCreator[$i])
+            @if(Auth::check() && ($isPhotoCreator[$i] || $albumsModel->isUserAlbumPhotoModerator($photos[$i]->photo_id, Auth::user()->id) ))
             <div id="delete-photo-data" class="caption photo-link" data-id="{{ $photos[$i]->photo_id }}">
                 <p>
                     {{ HTML::link(URL::to('albums/'.$photos[$i]->album_id.'/photo/'.$photos[$i]->photo_id), 'Edit', array('class' => 'btn btn-primary', 'role' => 'button')) }}
