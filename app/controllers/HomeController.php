@@ -108,7 +108,6 @@ class HomeController extends BaseController {
             $this->layout->content->usersLeft = [];
             if (Auth::check())
                 $this->layout->content->usersLeft = $albums->showAllLeftUsers(Auth::user()->id, $albumId);
-            var_dump($this->layout->content->usersLeft);
         }
         else
             $this->showNotFoundPage();
@@ -164,7 +163,7 @@ class HomeController extends BaseController {
 
         //$tag = $photo->getTagData($tagName);
         $photos = $photo->getPhotosByTagName($tagName);
-        //var_dump($photos);
+
         //if this tag exists
         $this->layout->content = View::make('tag', array('tagName' => $tagName));
         $this->layout->bodyclass = "home-page";

@@ -89,7 +89,6 @@ class AlbumsController extends BaseController {
         $all = $this->getAllOthersUsers($currentUserId);
         $mods = $this->getAllAlbumModerators($albumId);
 
-        $left = [];
         foreach($all as $id => $user) {
             foreach($mods as $modId=> $mod) {
                 if ($id == $modId) {
