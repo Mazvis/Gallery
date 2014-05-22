@@ -33,6 +33,15 @@
         <p><strong>Created at:</strong> {{ $albumData->album_created_at }}</p>
         <p><strong>Album fool description:</strong> Album full description: {{ $albumData->album_full_description }}</p>
         <p><strong>Creator:</strong> {{ $albumData->username }}</p>
+        <p><strong>Moderators:</strong>
+            @foreach($albumModerators as $moderator)
+                @if(end($albumModerators) != $moderator)
+                    {{ $moderator . ', ' }}
+                @else
+                    {{ $moderator }}
+                @endif
+            @endforeach
+        </p>
         <p><strong>Views:</strong> {{ $albumData->views }}</p>
         <p><strong>Album has photos:</strong> {{ $albumData->album_photos_count }}</p>
 
@@ -193,14 +202,14 @@
             <p>{{ Form::label('placeTaken', 'Fotographed at') }}</p>
             <p>{{ Form::text('placeTaken', $albumData->album_place, array('class' => 'form-control')) }}</p>
 
+            <p>{{ Form::label('moreModeratorsToAdd', 'Add more moderators') }}</p>
+            <p>{{ Form::select('moreModeratorsToAdd[]', $usersLeft, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+
+            <p>{{ Form::label('moderatorsToDelete', 'Delete current moderators') }}</p>
+            <p>{{ Form::select('moderatorsToDelete[]', $albumModerators, null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
+
             <p>{{ Form::label('albumTitlePhoto', 'Title photo') }}</p>
             <p>{{ Form::file('albumTitlePhoto', array('class' => 'form-control')) }}</p>
-
-            <p>{{ Form::label('albumModerators', 'Add more moderators') }}</p>
-            <p>{{ Form::select('categories[]', [1,2,5], null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
-
-            <p>{{ Form::label('albumModerators', 'Delete current moderators') }}</p>
-            <p>{{ Form::select('categories[]', [1,2,5,78,7], null, array('multiple'=>true, 'class' => 'form-control', 'data-selected-text-format' => 'count', 'data-style' => 'btn-danger')) }}</p>
 
             <p>{{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}</p>
 

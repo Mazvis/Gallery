@@ -41,6 +41,9 @@ class AlbumsController extends BaseController {
         return $albums->getAllAlbums();
     }
 
+    /**
+     * @return null
+     */
     public function isAlbumCreator(){
         if(Auth::check()){
             $albumM = new Album();
@@ -59,9 +62,44 @@ class AlbumsController extends BaseController {
         }
     }
 
+
+    /**
+     * MODERATORS
+     */
+
+    /**
+     * @param $currentUserId
+     * @return array
+     */
     public function getAllOthersUsers($currentUserId) {
         $albums = new Albums();
         return $albums->getAllOthersUsers($currentUserId);
+    }
+
+    /**
+     * @param $albumId
+     * @return mixed
+     */
+    public function getAllAlbumModerators($albumId) {
+        $albums = new Albums();
+        return $albums->getAllAlbumModerators($albumId);
+    }
+
+    public function showAllLeftUsers($currentUserId, $albumId) {
+        $all = $this->getAllOthersUsers($currentUserId);
+        $mods = $this->getAllAlbumModerators($albumId);
+
+        $left = [];
+        foreach($all as $id => $user) {
+            foreach($mods as $modId=> $mod) {
+                if ($id == $modId) {
+                    unset($all[$id]);
+                    unset($all[$id]);
+                }
+            }
+        }
+
+        return $all;
     }
 
 }

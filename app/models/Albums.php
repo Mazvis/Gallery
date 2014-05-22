@@ -72,6 +72,15 @@ class Albums{
         order by album_created_at', array());
     }
 
+
+    /**
+     * MODERATORS
+     */
+
+    /**
+     * @param $currentUserId
+     * @return array
+     */
     public function getAllOthersUsers($currentUserId){
         $users = DB::select('select * FROM users where id != ?', array($currentUserId));
         if (!$users){
@@ -83,4 +92,20 @@ class Albums{
         }
         return $sUsers;
     }
+
+    public function getAllAlbumModerators($albumId) {
+        $users = DB::select('select * FROM album_moderators
+        LEFT JOIN users ON album_moderators.user_id = users.id
+        WHERE album_id = ?', array($albumId));
+        if (!$users)
+            $users = [];
+        $sUsers = [];
+        foreach ($users as $user) {
+            $sUsers[$user->id] = $user->name;
+        }
+        return $sUsers;
+    }
+
+
+
 }

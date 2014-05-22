@@ -100,6 +100,15 @@ class HomeController extends BaseController {
             $this->layout->content->isUserHavingPrivilegies = $album->isUserHavingPrivilegies($albumId);
 
             $this->layout->content->isUserAlbumCreator = $album->isUserAlbumCreator($albumId);
+
+            //moderators
+            $albums = new AlbumsController();
+            $this->layout->content->albumModerators = $albums->getAllAlbumModerators($albumId);
+
+            $this->layout->content->usersLeft = [];
+            if (Auth::check())
+                $this->layout->content->usersLeft = $albums->showAllLeftUsers(Auth::user()->id, $albumId);
+            var_dump($this->layout->content->usersLeft);
         }
         else
             $this->showNotFoundPage();
