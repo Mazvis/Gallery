@@ -56,7 +56,6 @@ class Albums{
         order by album_created_at', array());
     }
 
-
     /**
      * MODERATORS
      */
