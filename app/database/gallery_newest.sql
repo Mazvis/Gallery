@@ -311,6 +311,17 @@ INSERT INTO `photo_categories` (`photo_category_id`, `photo_id`, `category_id`) 
 -- --------------------------------------------------------
 
 --
+-- Sukurta duomenų struktūra lentelei `photo_people`
+--
+
+CREATE TABLE IF NOT EXISTS `photo_people` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `photo_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
 -- Table structure for table `photo_tags`
 --
 

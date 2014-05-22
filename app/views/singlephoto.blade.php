@@ -34,6 +34,7 @@
         <p><strong>Place taken:</strong>  {{ $photoData->photo_taken_at }}</p>
         <p><strong>Created at:</strong>  {{ $photoData->photo_created_at }}</p>
         <p><strong>Photo description:</strong>  {{ $photoData->photo_short_description }}</p>
+        <p><strong>People in photo:</strong>  @for ($i = 0; $i < sizeOf($allPeoples); $i++) {{  $allPeoples[$i] }}@if($i != sizeOf($allPeoples)-1), @endif @endfor</p>
         <!--<p><strong>Author:</strong>  {{ HTML::link('user/'.$photoData->username, $photoData->username) }}</p>-->
         <p><strong>Photo tags:</strong>  @for ($i = 0; $i < sizeOf($photoTagNames); $i++) {{ HTML::link('tag/'.$photoTagNames[$i], $photoTagNames[$i]) }}@if($i < sizeOf($photoTagNames)-2), @endif @endfor</p>
         <p><strong>Views:</strong>  {{ $photoData->views }}</p>
@@ -175,7 +176,25 @@
 
             <p>{{ Form::label('photoTags', 'edit tags (separate tags by comma and space(", ") or just space(" "))') }}</p>
             <p>{{ Form::text('photoTags', $photoTags, array('class' => 'form-control')) }}</p>
+            <div id="users">
+            @for($i=0; $i < count($allPeoples); $i++)
 
+                <div style="margin-top: 10px" class="row form-inline">
+                    <div id="username" class="col-md-4 input-group-sm">
+                        <input id="up-name" name="users[]" type="text" class='form-control' value="{{ $allPeoples[$i] }}" autocomplete="off">
+                    </div>
+                    <button id="up-del-user" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-minus-sign"></span></button>
+                </div>
+
+            @endfor
+
+                <div style="margin-top: 10px" class="row form-inline">
+                    <div id="username" class="col-md-4 input-group-sm">
+                        <input id="up-name" name="users[]" type="text" class='form-control' autocomplete="off">
+                    </div>
+                    <button id="up-add-user" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                </div>
+            </div>
             <p>{{ Form::label('albumTitlePhoto', 'Make this title album photo?') }}</p>
             <p>{{ Form::checkbox('albumTitlePhoto', true, array('class' => 'check', 'checked' => '')) }}</p>
 

@@ -241,6 +241,16 @@
             <p>{{ Form::label('tagsToAdd', 'write tags to add to photo') }}</p>
             <p>{{ Form::text('tagsToAdd', '', array('class' => 'form-control')) }}</p>
 
+            <p>{{ Form::label('peopleAdd', 'Add people') }}</p>
+            <div id="users">
+                <div class="row form-inline">
+                    <div id="username" class="col-md-4 input-group-sm">
+                        <input id="name" name="users[]" type="text" class='form-control' autocomplete="off">
+                    </div>
+                    <button id="add-user" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                </div>
+            </div>
+
             <p>{{ Form::label('photos', 'upload photos') }}</p>
             <p>{{ Form::file('photos[]', array('multiple'=>true, 'id' => 'photos_id', 'class' => 'form-control')) }}</p>
 

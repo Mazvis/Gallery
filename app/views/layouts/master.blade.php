@@ -13,8 +13,9 @@
 
     <!-- Style css-->
     {{ HTML::style('assets/css/style.css') }}
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 {{ HTML::script('assets/bootstrap-3.0.0/assets/js/jquery.js') }}
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -187,7 +188,6 @@
 
     </div>
 </div>
-
 <!-- Placed at the end of the document so the pages load faster -->
 {{ HTML::script('assets/bootstrap-3.0.0/dist/js/bootstrap.min.js') }}
 {{ HTML::script('assets/bootstrap-3.0.0/dist/js/bootstrap.js') }}
@@ -196,8 +196,10 @@
 
 <!-- Scripts -->
 {{ HTML::script('assets/js/script.js') }}
+
 {{ HTML::script('assets/js/ajax-requests.js') }}
 {{ HTML::script('assets/js/validation.js') }}
+{{ HTML::script('assets/js/tagPeople.js') }}
 
 </body>
 </html>

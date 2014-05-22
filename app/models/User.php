@@ -161,6 +161,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $username;
     }
 
+    public function getUserNameById($username){
+        $users = DB::table('users')->where('username', $username)->get();
+        $user = 'Unknown';
+        foreach ($users as $user)
+            $userId = $user->id;
+        return $userId;
+    }
+
     /**
      * Gets user
      *
@@ -191,6 +199,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             // auth failure, go back to the login
             return Redirect::to('login')->with('login_errors', true);
         }
+    }
+
+    public function getUsersByStr($str){
+        $name = '%'.$str.'%';
+        $users = DB::select('SELECT username from users where username LIKE ? ',array($name));
+        return $users;
+    }
+
+    public function checkOrUserExists($name){
+        $users = DB::select('SELECT username FROM users WHERE username = ?',array($name));
+        return $users;
     }
 
     public function logout() {

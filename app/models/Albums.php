@@ -68,9 +68,9 @@ class Albums{
     public function getAllOthersUsers($currentUserId){
         $users = DB::select('select * FROM users where id != ?', array($currentUserId));
         if (!$users){
-            $users = [];
+            $users = array();
         }
-        $sUsers = [];
+        $sUsers = array();
         foreach ($users as $user) {
             $sUsers[$user->id] = $user->name;
         }
@@ -82,8 +82,8 @@ class Albums{
         LEFT JOIN users ON album_moderators.user_id = users.id
         WHERE album_id = ?', array($albumId));
         if (!$users)
-            $users = [];
-        $sUsers = [];
+            $users = array();
+        $sUsers = array();
         foreach ($users as $user) {
             $sUsers[$user->id] = $user->name;
         }

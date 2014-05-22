@@ -23,7 +23,7 @@ class Photo{
      * @param $albumTitlePhoto
      * @return string
      */
-    public function editPhoto($currentAlbumId, $currentPhotoId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $editedTags, $albumTitlePhoto) {
+    public function editPhoto($currentAlbumId, $currentPhotoId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $editedTags, $albumTitlePhoto,$users) {
         //-----------------Editing photo data---------------------//
         //update photo data
         DB::table('photos')
@@ -49,6 +49,23 @@ class Photo{
                             'category_id' => $catId[0]->category_id,
                         )
                     );
+            }
+        }
+
+       /* foreach($users as $user){
+            if($user != ""){
+                $usId = $ob->getUserNameById($user);
+                $photoP = DB::insert('insert into photo_people (photo_id, user_id) values (?,?)',array($insertedPhotoId,$usId));
+            }
+        }*/
+        //users
+        $ob = new User();
+        DB::table('photo_people')->where('photo_id',$currentPhotoId)->delete();
+        for($i = 0; $i < sizeOf($users); $i++){
+            if($users[$i] != ""){
+                $usId = $ob->getUserNameById($users[$i]);
+                $photoP = DB::insert('insert into photo_people (photo_id, user_id) values (?,?)',array($currentPhotoId,$usId));
+                //DB::table('photo_people')->where('photo_id',$currentPhotoId)->delete();
             }
         }
 
@@ -166,6 +183,29 @@ class Photo{
         GROUP BY photos.photo_id', array($photoId, $albumId));
 
         return $photos;
+    }
+    /**
+     * Gets photo peoples
+     *
+     * @param $photoId
+     * @return mixed
+     */
+    public function getAllPhotoPeoples($photoId){
+        $users = DB::select('SELECT user_id FROM photo_people where photo_id = ?',array($photoId));
+       /* var_dump($users);
+        exit;*/
+        $userNames = array();
+        for($i=0; $i < count($users); $i++){
+            $userNames[$i] = DB::select('SELECT username FROM users where id = ?',array($users[$i]->user_id));
+        }
+/*        foreach($users as $us){
+            $userNames[] = DB::select('SELECT username FROM users where id = ?',array($us->user_id));
+        }*/
+        $userN = array();
+        for($i=0; $i<count($userNames) ; $i++){
+            $userN[$i] = $userNames[$i][0]->username;
+        }
+        return $userN;
     }
 
     /**

@@ -59,7 +59,7 @@ class HomeController extends BaseController {
         $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
 
         //moderators
-        $this->layout->content->allOtherUsers = [];
+        $this->layout->content->allOtherUsers = array();
         if (Auth::check()) {
             $this->layout->content->allOtherUsers = $albums->getAllOthersUsers(Auth::user()->id);
             $this->layout->content->albumsController = $albums;
@@ -76,6 +76,7 @@ class HomeController extends BaseController {
 
         $albumData = $album->getAlbumDataByAlbumId($albumId);
         //if album exist
+
         if($albumData){
             $this->layout->content = View::make('singlealbum', array('albumId' => $albumId));
             $this->layout->bodyclass = "home-page";
@@ -108,7 +109,7 @@ class HomeController extends BaseController {
             $albums = new AlbumsController();
             $this->layout->content->albumModerators = $albums->getAllAlbumModerators($albumId);
 
-            $this->layout->content->usersLeft = [];
+            $this->layout->content->usersLeft = array();
             if (Auth::check()){
                 $this->layout->content->usersLeft = $albums->showAllLeftUsers(Auth::user()->id, $albumId);
                 $this->layout->content->isUserAlbumModerator = $albums->isUserAlbumModerator($albumId, Auth::user()->id);
@@ -146,7 +147,8 @@ class HomeController extends BaseController {
             //categories
             $this->layout->content->categories = $photo->getCategoriesData($photoId);
             $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
-
+            //users
+            $this->layout->content->allPeoples = $photo->getAllPhotoPeoples($photoId);
             //likes
             $this->layout->content->likes = $photo->getPhotoLikes($photoId);
             $this->layout->content->isLikeAlreadyExists = $photo->isLikeAlreadyExists($photoId);

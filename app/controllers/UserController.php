@@ -87,4 +87,28 @@ class UserController extends BaseController {
         $msg = $user->validateSettings($input, Auth::user()->id);
         return Redirect::to('/')->with('changeSettingsStatus', $msg);
     }
+
+    public function usersNamesByStr(){
+        $user = new User;
+        $uStr = Input::get('string');
+        $users = $user->getUsersByStr($uStr);
+        $use = array();
+        foreach($users as $us){
+            $use[] = $us->username;
+        }
+
+
+        return $use;
+    }
+
+    public function checkOrUserExists(){
+        $user = new User;
+        $username = Input::get('username');
+        $users = $user->checkOrUserExists($username);
+
+        if(count($users) > 0){
+            return "OK";
+        }
+        return "false";
+    }
 }

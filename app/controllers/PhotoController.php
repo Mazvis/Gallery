@@ -29,14 +29,14 @@ class PhotoController extends BaseController {
                 $currentAlbumId = strip_tags(Input::get('albumId'));
                 $selectedCategories = Input::get('categories');
                 $editedTags = Input::get('photoTags');
-
+                $users = Input::get('users');
                 $photoName = strip_tags(Input::get('photoName'));
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $placeTaken = strip_tags(Input::get('placeTaken'));
                 $albumTitlePhoto = Input::get('albumTitlePhoto');
 
                 $photo = new Photo;
-                return $photo->editPhoto($currentAlbumId, $currentPhotoId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $editedTags, $albumTitlePhoto);
+                return $photo->editPhoto($currentAlbumId, $currentPhotoId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $editedTags, $albumTitlePhoto,$users);
             }
         }
     }
@@ -65,6 +65,11 @@ class PhotoController extends BaseController {
     public function getAllPhotoData(){
         $photo = new Photo;
         return $photo->getAllPhotoData();
+    }
+
+    public function getAllPhotoPeoples($photoId){
+        $photo = new Photo;
+        return $photo->getAllPhotoPeoples($photoId);
     }
 
     /*

@@ -23,7 +23,7 @@ class Album{
      * @param $titlePhoto
      * @return mixed
      */
-    public function uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFile, $titlePhoto){
+    public function uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFile, $titlePhoto,$users){
 
         $insertedPhotoId = 'nothing to upload';
 
@@ -104,6 +104,15 @@ class Album{
                                         )
                                     );
                             }
+                            //add users
+                            $ob = new User();
+                            foreach($users as $user){
+                                if($user != ""){
+                                    $usId = $ob->getUserNameById($user);
+                                    $photoP = DB::insert('insert into photo_people (photo_id, user_id) values (?,?)',array($insertedPhotoId,$usId));
+                                }
+                            }
+
                             //-----------------Editing album title photo data---------------------//
                             //if 'make uploaded photo to title album photo' property is selected
                             if($titlePhoto){

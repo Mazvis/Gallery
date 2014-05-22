@@ -30,14 +30,15 @@ class AlbumController extends BaseController {
                 $placeTaken = strip_tags(Input::get('placeTaken'));
                 $selectedCategories = Input::get('categories');
                 $writtenTags = Input::get('tagsToAdd');
+                $users = Input::get('users');
 
-                $photoFiles = [];
+                $photoFiles = array();
                 if (Input::hasFile('photos'))
                     $photoFiles = Input::file('photos');
 
                 $titlePhoto = Input::get('titlePhoto');
 
-                return $album->uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFiles, $titlePhoto);
+                return $album->uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFiles, $titlePhoto, $users);
                 //return $currentAlbumId.$currentUserID.$photoName.$shortDescription.$placeTaken.$photoFile.$titlePhoto;
                 //return Redirect::to('albums/'.$currentAlbumId);
             }
@@ -75,6 +76,7 @@ class AlbumController extends BaseController {
                 $moreModeratorsToAdd = Input::get('moreModeratorsToAdd');
 
                 $moderatorsToDelete = Input::get('moderatorsToDelete');
+
 
                 $album = new Album;
                 return $album->editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories, $moreModeratorsToAdd, $moderatorsToDelete);

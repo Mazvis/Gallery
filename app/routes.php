@@ -64,6 +64,9 @@ Route::post('comment-in-album', 'AlbumController@writeComment');
 
 Route::post('show-album-photos', 'AlbumController@getAlbumPhotos');
 
+Route::post('getUserByStr','UserController@usersNamesByStr');
+Route::post('checkOrUserExists','UserController@checkOrUserExists');
+
 //comment deleting in photo and album page
 Route::post('delete-comment', 'AlbumController@deleteComment');
 
