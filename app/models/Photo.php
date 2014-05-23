@@ -248,6 +248,9 @@ class Photo{
         //deletes photo information from database
         $success[4] = DB::table('photos')->where('photo_id', $photoId)->delete();
 
+        //delete user tags
+        $success[5] = DB::delete('delete from photo_people where photo_id = ?',array($photoId));
+
         foreach($success as $s)
             $s *= $s;
 
