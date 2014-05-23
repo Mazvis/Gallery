@@ -13,7 +13,7 @@
                 photoId: photoIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
                 //showPhotosInAlbumPage();
             });
@@ -36,7 +36,7 @@
                 albumId: albumIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
                 //showAlbumsInAlbumPage();
             });
@@ -62,7 +62,7 @@
                 albumId: albumIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
             });
     });
@@ -77,7 +77,7 @@
                 photoId: photoIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
             });
     });
@@ -100,7 +100,7 @@
     //album comment delete
     $('body').delegate("#album-comment-delete-button", "click",function () {
         var commentIdToDelete = $(this).data('commentid');
-        alert(commentIdToDelete);
+        //alert(commentIdToDelete);
         $.ajax({
             type: "POST",
             url: '../delete-comment',
@@ -108,7 +108,7 @@
                 commentIdToDelete: commentIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
             });
     });
@@ -145,8 +145,8 @@
                 photoId: photoIdToDelete
             }
         }).done(function( msg ) {
-                //alert(msg);
-                window.location.reload();
+                //console.log(msg);
+                window.location = '..';
             });
     });
 
@@ -184,7 +184,7 @@
     //photo comment delete
     $('body').delegate("#photo-comment-delete-button", "click",function () {
         var commentIdToDelete = $(this).data('commentid');
-        alert(commentIdToDelete);
+        //alert(commentIdToDelete);
         $.ajax({
             type: "POST",
             url: '../../../delete-comment',
@@ -192,7 +192,7 @@
                 commentIdToDelete: commentIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
             });
     });
@@ -211,7 +211,7 @@
                 albumId: albumIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
             });
     });
@@ -230,7 +230,7 @@
                 photoId: photoIdToDelete
             }
         }).done(function( msg ) {
-                alert(msg);
+                //alert(msg);
                 window.location.reload();
             });
     });
@@ -281,7 +281,7 @@
                     //alert('Event created successfully..');
                     window.location.reload();
                 }).fail(function() {
-                    alert(msg);
+                    //alert(msg);
                     //alert("fail!");
                     window.location.reload();
                 });

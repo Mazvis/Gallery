@@ -83,7 +83,6 @@ class PhotoController extends BaseController {
      */
     public function deletePhoto(){
         $currentAlbumId = Input::get('albumId');
-
         if(Auth::check()){
             $photo = new Photo();
             $albums = new Albums();
@@ -93,8 +92,8 @@ class PhotoController extends BaseController {
                 || Auth::user()->role_id == 1
                 || $albums->isUserAlbumPhotoModerator($currentPhotoId, $currentUserID)
             ){
-                return $photo->deletePhoto($currentPhotoId);
-                //return Redirect::to('albums/'.$currentAlbumId);
+                $photo->deletePhoto($currentPhotoId);
+                return 'OK';
             }
         }
         //return $currentAlbumId;
