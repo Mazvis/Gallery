@@ -30,6 +30,13 @@ class HomeController extends BaseController {
         $this->layout->content->isPhotoCreator = $photo->isPhotoCreatorForPhotos();
 
         $this->layout->content->albumsModel = new Albums();
+        
+        $this->layout->content->allUsers = array();
+        if (Auth::check())
+            if(Auth::user()->role_id == 1){
+                $users = new UserController();
+                $this->layout->content->allUsers = $users->getAllUsers(Auth::user()->id);
+            }
     }
 
     /**

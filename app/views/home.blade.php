@@ -26,7 +26,26 @@
 {{ Form::close() }}
 
 @if(Auth::user()->role_id == 1)
-
+{{ Form::open(array('route' => 'user.roles', 'id' => 'roles')) }}
+<fieldset>
+    <legend>Change user role</legend>
+    @if (!Session::has('changeRoleStatus'))
+    <div class="form-group">
+        <label class="control-label col-lg-4">Select user</label>
+        <div class="col-lg-6">
+            {{ Form::select('user_id', $allUsers, null, array('class' => 'form-control')) }}
+        </div>
+        <div class="form-submit col-lg-2">
+            <button type="submit" class="btn btn-sm btn-success">Change role</button>
+        </div>
+    </div>
+    @else
+    <p class="alert alert-success">{{Session::get('changeRoleStatus') }}</p>
+    @endif
+    <div class="clear"></div>
+</fieldset>
+{{ Form::token() }}
+{{ Form::close() }}
 @endif
 
 @endif

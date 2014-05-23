@@ -216,5 +216,38 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         Auth::logout();
         return Redirect::back();
     }
+    
+    public function getAllUsers($currUserId){
+        $users = DB::select('select * FROM users where id != ?', array($currUserId));
+        if (!$users){
+            $users = array();
+        }
+        $sUsers = array();
+        foreach ($users as $user) {
+            $sUsers[$user->id] = $user->name;
+        }
+        return $sUsers;
+    }
+    
+    public function changeUserRole($userID, $currUserID, $currUserRole) {
+        
+        if($userID == $currUserID || $currUserRole != 1)
+            return "Can not change yourself role or you do not have permision.";
+        
+        $userRole = DB::select('select role_id FROM users where id = ?', array($userID));
+        if(!empty($userRole)){            
+            $admRole = 1; $usrRole = 2; $roleID = $userRole[0]->role_id;      
+            $newRole = ($roleID == $usrRole) ? $admRole : $usrRole;
+            
+            DB::table($this->table)
+                ->where('id', $userID)
+                ->update(array('role_id' => $newRole));
+            $msg = "User role changed to ";
+            $msg .= ($newRole == $admRole) ? "administrator." : "registered user.";
+        }else
+            $msg = "User do not exist. Sorry.";
+        
+        return $msg;
+    }
 
 }

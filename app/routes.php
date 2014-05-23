@@ -119,6 +119,12 @@ Route::post('validate-settings', array(
     'as' => 'user.settings'
 ));
 
+// AJAX query for user role changing
+Route::post('validate-roles', array(
+    'uses' => 'UserController@changeUserRole',
+    'as' => 'user.roles'
+));
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Show user profile page
 /*--------------------------------------------------------------------------------------------------------------------*/

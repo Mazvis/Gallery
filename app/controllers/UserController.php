@@ -111,4 +111,16 @@ class UserController extends BaseController {
         }
         return "false";
     }
+    
+    public function getAllUsers($currUserId){
+        $user = new User();
+        return $user->getAllUsers($currUserId);
+    }
+    
+    public function changeUserRole(){
+        $user = new User;
+        $userID = Input::get('user_id');
+        $msg = $user->changeUserRole($userID, Auth::user()->id, Auth::user()->role_id);
+        return Redirect::to('/')->with('changeRoleStatus', $msg);
+    }
 }
