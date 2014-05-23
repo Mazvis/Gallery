@@ -70,6 +70,10 @@
                     <ul class="nav navbar-nav">
                         <li class="@if(Request::is('/'))active@endif">{{ HTML::link('/', 'Home') }}</li>
                         <li class="@if(Request::is('albums')){{'active'}}@else{{' '}}@endif">{{ HTML::link('/albums', 'Albums') }}</li>
+                        @if(Auth::check())
+                        <li class="@if(Request::is('myactions')){{'active'}}@else{{' '}}@endif">{{ HTML::link('/myactions', 'My Actions') }}</li>
+                        <li class="@if(Request::is('mysubscribtions')){{'active'}}@else{{' '}}@endif">{{ HTML::link('/mysubscribtions', 'My Subscribtions') }}</li>
+                        @endif
                         @if(Auth::check() && Auth::user()->role_id == 1)
                         <li class="dropdown @if(Request::is('panel')){{'active'}}@else{{' '}}@endif">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin panel<b class="caret"></b></a>
@@ -78,6 +82,7 @@
                                 @if(Auth::user()->role_id == 1)<li class="admin-panel-li"><a href="{{ URL::to('panel') }}">Admin panel</a></li>@endif --}}
                                 <li class="admin-panel-li"><a href="{{ URL::to('searches') }}">Search history</a></li>
                                 <li class="admin-panel-li"><a href="{{ URL::to('logins') }}">Login attempts history</a></li>
+                                <li class="admin-panel-li"><a href="{{ URL::to('useractions') }}">User actions</a></li>
                             </ul>
                         </li>
                         @elseif(!Auth::check())

@@ -2,6 +2,6 @@
 <script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
 
 {{ Datatable::table()
-->addColumn('IP', 'Login attempt', 'Date')       // these are the column headings to be shown
-->setUrl(route('api.logins', ['userId'=>$userId]))   // this is the route where data will be retrieved
+->addColumn('Action', 'IP', 'Date')       // these are the column headings to be shown
+->setUrl(route('api.myactions'))   // this is the route where data will be retrieved
 ->render() }}

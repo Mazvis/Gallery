@@ -64,6 +64,8 @@ class Album{
                                 )
                             );
 
+                            UserAction::add('Photo "' . $photoName . '" was uploaded');
+
                             $explodedTags = preg_replace("/[^\w\ _]+/", '', $writtenTags); // strip all punctuation characters, news lines, etc.
                             $explodedTags = preg_split("/\s+/", $explodedTags); // split by left over spaces
                             $tagLine = "";
@@ -213,6 +215,8 @@ class Album{
                     'album_place' => $placeTaken
                 )
             );
+
+        UserAction::add('Album "' . $albumName . '" was updated');
 
         //add more moderators
         if ($moreModeratorsToAdd != null && !empty($moreModeratorsToAdd)){
@@ -380,6 +384,8 @@ class Album{
         if($photos){
             File::delete($photos[0]->photo_destination_url);
 
+            UserAction::add('Photo "' . ($photos[0]->photo_name) . '" was deleted');
+
             DB::table('photos')->where('photo_id', $photoId)->delete();
             //DB::table('albums')->where('album_title_photo_id', $photoId)->update(array('album_title_photo_id' => null)); //???
         }
@@ -402,11 +408,14 @@ class Album{
 
         $photos = DB::table('photos')->where('album_id', $albumId)->get();
 
+        $albums = DB::table('albums')->where('album_id', $albumId)->get();
+        UserAction::add('Album "' . ($albums[0]->album_name) . '" was deleted');
+
         //if exist photos in this album
         if($photos){
             //deletes album directory
-            $albums = DB::table('albums')->where('album_id', $albumId)->get();
             $userId = $albums[0]->user_id;
+
             File::deleteDirectory('uploads/'.$userId.'/albums/'.$albumId);
 
             //deletes all album photo likes
@@ -477,7 +486,9 @@ class Album{
      */
     public function makeLike($albumId, $currentUserID){
         $isExist = $this->isLikeAlreadyExists($albumId, $currentUserID);
+        $albums = DB::table('albums')->where('album_id', $albumId)->get();
         if($isExist == 0 && $currentUserID != null){
+            UserAction::add('Album liked "' . ($albums[0]->album_name) . '"');
             DB::table('likes')->insert(
                 array(
                     'album_id' => $albumId,
@@ -485,8 +496,10 @@ class Album{
                 )
             );
         }
-        else if($isExist == 1)
+        else if($isExist == 1) {
+            UserAction::add('Album unliked "' . ($albums[0]->album_name) . '"');
             DB::delete('delete from likes where album_id = ? and user_id = ?', array($albumId, $currentUserID));
+        }
 
         return $currentUserID;
     }
@@ -519,7 +532,9 @@ class Album{
      */
     public function writeComment($comment, $currentAlbumId, $currentUserID, $posterIp){
         //if album exists
-        if(DB::table('albums')->where('album_id',$currentAlbumId)->get()){
+        $albums = DB::table('albums')->where('album_id', $currentAlbumId)->get();
+        if ($albums) {
+            UserAction::add('Commented on album "' . ($albums[0]->album_name) . '"');
             DB::table('comments')->insert(
                 array(
                     'comment' => $comment,

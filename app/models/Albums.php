@@ -28,6 +28,7 @@ class Albums{
                 'user_id' => $currentUserId,
             )
         );
+        UserAction::add('Album "' . $albumName . '" was created');
 
         //add moderators
         foreach($moderators as $i) {
@@ -39,8 +40,9 @@ class Albums{
             );
         }
 
-        if($insertedAlbumId != false)
+        if ($insertedAlbumId != false) {
             return Redirect::back();
+        }
     }
 
     /**

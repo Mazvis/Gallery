@@ -48,6 +48,29 @@
 {{ Form::close() }}
 @endif
 
+@if(Auth::check())
+{{ Form::open(array('route' => 'user.subscribe', 'id' => 'subscribe')) }}
+<fieldset>
+    <legend>Subscribe user</legend>
+    @if (!Session::has('subscribed'))
+    <div class="form-group">
+        <label class="control-label col-lg-4">Select user</label>
+        <div class="col-lg-6">
+            {{ Form::select('user_id', $allUsers, null, array('class' => 'form-control')) }}
+        </div>
+        <div class="form-submit col-lg-2">
+            <button type="submit" class="btn btn-sm btn-success">Subscribe</button>
+        </div>
+    </div>
+    @else
+    <p class="alert alert-success">{{Session::get('subscribed') }}</p>
+    @endif
+    <div class="clear"></div>
+</fieldset>
+{{ Form::token() }}
+{{ Form::close() }}
+@endif
+
 @endif
 
 <article>

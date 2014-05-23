@@ -35,6 +35,8 @@ class Photo{
                 )
             );
 
+        UserAction::add('Photo updated "' . ($photoName) . '"');
+
         //categories
         for($i = 0; $i < sizeOf($selectedCategories); $i++){
             $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
@@ -237,11 +239,13 @@ class Photo{
         $success[1] = DB::delete('delete from comments where photo_id = ?', array($photoId));
 
         //deletes photo from directory
-        $photo = DB::select('select photo_destination_url from photos where photo_id = ?', array($photoId));
-        if($photo)
+        $photo = DB::select('select * from photos where photo_id = ?', array($photoId));
+        if($photo) {
             if($photo[0]->photo_destination_url)
                 $success[2] = File::delete($photo[0]->photo_destination_url);
 
+            UserAction::add('Photo deleted "' . ($photo[0]->photo_name) . '"');
+        }
         //deletes photo tags
         $success[3] = DB::table('photo_tags')->where('photo_id', $photoId)->delete();
 
@@ -297,6 +301,7 @@ class Photo{
      */
     public function makeLike($photoId, $currentUserID){
         $isExist = $this->isLikeAlreadyExists($photoId, $currentUserID);
+        $photo = DB::select('select * from photos where photo_id = ?', array($photoId));
         if($isExist == 0 && $currentUserID != null){
             DB::table('likes')->insert(
                 array(
@@ -304,9 +309,12 @@ class Photo{
                     'user_id' => $currentUserID,
                 )
             );
+            UserAction::add('Photo liked "' . ($photo[0]->photo_name) . '"');
         }
-        else if($isExist == 1)
+        else if($isExist == 1) {
             DB::delete('delete from likes where photo_id = ? and user_id = ?', array($photoId, $currentUserID));
+            UserAction::add('Photo unliked "' . ($photo[0]->photo_name) . '"');
+        }
 
         return $currentUserID;
     }
@@ -339,6 +347,8 @@ class Photo{
      */
     public function writeComment($comment, $currentPhotoId, $currentUserID, $posterIp){
 
+        $photo = DB::select('select * from photos where photo_id = ?', array($currentPhotoId));
+        UserAction::add('Commented on photo "' . ($photo[0]->photo_name) . '"');
         DB::table('comments')->insert(
             array(
                 'comment' => $comment,

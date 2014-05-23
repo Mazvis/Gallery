@@ -32,8 +32,7 @@ class HomeController extends BaseController {
         $this->layout->content->albumsModel = new Albums();
         
         $this->layout->content->allUsers = array();
-        if (Auth::check())
-            if(Auth::user()->role_id == 1){
+        if (Auth::check()){
                 $users = new UserController();
                 $this->layout->content->allUsers = $users->getAllUsers(Auth::user()->id);
             }

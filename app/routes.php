@@ -125,6 +125,12 @@ Route::post('validate-roles', array(
     'as' => 'user.roles'
 ));
 
+// AJAX query for user role changing
+Route::post('subscribe', array(
+    'uses' => 'UserController@subscribe',
+    'as' => 'user.subscribe'
+));
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Show user profile page
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -154,6 +160,15 @@ Route::get('user/{username}', 'HomeController@showUserProfile');
 // Show admin panel page
 /*--------------------------------------------------------------------------------------------------------------------*/
 Route::get('panel', 'HomeController@showPanel');
+
+Route::get('mysubscribtions', 'UserController@showMySubscribtions');
+Route::post('mysubscribtions', array(
+    'uses'=>'UserController@showMySubscribtionsUser',
+    'as' => 'user.mysubscribtions'
+));
+Route::resource('mysubscribtions', 'UserController');
+Route::get('api/mysubscribtions', array('as'=>'api.mysubscribtions', 'uses'=>'UserController@getMySubscribtionsUserDatatable'));
+
 Route::get('searches', 'AdminController@showSearches');
 Route::resource('searches', 'AdminController');
 Route::get('api/searches', array('as'=>'api.searches', 'uses'=>'AdminController@getSearchesDatatable'));
@@ -162,6 +177,16 @@ Route::get('logins', 'AdminController@showLogins');
 Route::post('logins', 'AdminController@showLogins');
 Route::resource('logins', 'AdminController');
 Route::get('api/logins', array('as'=>'api.logins', 'uses'=>'AdminController@getLoginsDatatable'));
+
+
+Route::get('myactions', 'UserController@showMyActions');
+Route::resource('myactions', 'UserController');
+Route::get('api/myactions', array('as'=>'api.myactions', 'uses'=>'UserController@getMyActionsDatatable'));
+
+Route::get('useractions', 'AdminController@showUserActions');
+Route::post('useractions', 'AdminController@showUserActions');
+Route::resource('useractions', 'AdminController');
+Route::get('api/useractions', array('as'=>'api.useractions', 'uses'=>'AdminController@getUserActionsDatatable'));
 
 // route for creating category
 Route::post('create-category', array(
