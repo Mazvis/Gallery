@@ -39,7 +39,6 @@ class AlbumController extends BaseController {
                 $titlePhoto = Input::get('titlePhoto');
 
                 return $album->uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFiles, $titlePhoto, $users);
-                //return $currentAlbumId.$currentUserID.$photoName.$shortDescription.$placeTaken.$photoFile.$titlePhoto;
                 //return Redirect::to('albums/'.$currentAlbumId);
             }
         }
@@ -66,8 +65,6 @@ class AlbumController extends BaseController {
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $fullDescription = strip_tags(Input::get('fullDescription'));
                 $placeTaken = strip_tags(Input::get('placeTaken'));
-                //$selectedCategories = Input::get('categories');
-                $selectedCategories = 'Uncategorized';
 
                 $titlePhotoFile = null;
                 if (Input::hasFile('albumTitlePhoto'))
@@ -77,12 +74,11 @@ class AlbumController extends BaseController {
 
                 $moderatorsToDelete = Input::get('moderatorsToDelete');
 
-
                 $album = new Album;
-                return $album->editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories, $moreModeratorsToAdd, $moderatorsToDelete);
+                return $album->editAlbum($currentAlbumId, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $moreModeratorsToAdd, $moderatorsToDelete);
             }
         }
-        //return Redirect::to('albums/'.$currentAlbumId);
+        return Redirect::to('albums/'.$currentAlbumId);
     }
 
     /*
@@ -238,7 +234,7 @@ class AlbumController extends BaseController {
     public function writeComment(){
         $album = new Album();
 
-        $currentUserID = null; //defoult
+        $currentUserID = null; //default
         if(Auth::check())
             $currentUserID = Auth::user()->id;
 

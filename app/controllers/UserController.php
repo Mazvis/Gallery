@@ -97,8 +97,6 @@ class UserController extends BaseController {
         foreach($users as $us){
             $use[] = $us->username;
         }
-
-
         return $use;
     }
 
@@ -161,7 +159,6 @@ class UserController extends BaseController {
         ->searchColumns('action')
         ->make();
     }
-
 
     public function showMyActions()
     {

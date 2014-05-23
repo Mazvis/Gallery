@@ -1,4 +1,4 @@
-Funkcionalumo a
+Funkcionalumo aprašas
 
 Vartotojų galimybės
     užsiregistravę vartotojai gali prisijungt, neužsiregistravę - užsiregistruot
@@ -54,6 +54,3 @@ Sistemos reikalavimai
     PHP 5.3 arba naujesnė
     MySQL 5.5 arba naujesnė
     Composer
-
-Projektą galima pasiekti internete adresu:
-www.mazvio.asmeninis.lt

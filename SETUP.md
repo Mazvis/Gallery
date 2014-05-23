@@ -4,7 +4,7 @@ Nueiname į app/config/database.php ir pakeičiam į savo duomenis:
 'mysql' => array(
 	'driver'    => 'mysql',
 	'host'      => 'localhost',
-	'database'  => 'zwazaaz',
+	'database'  => 'gallery',
 	'username'  => 'root',
 	'password'  => '',
 	'charset'   => 'utf8',

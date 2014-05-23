@@ -12,6 +12,4 @@ class Login extends Eloquent
     protected $table = 'logins';
     
     public $timestamps = false;
-
-
 }

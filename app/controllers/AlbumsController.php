@@ -19,14 +19,12 @@ class AlbumsController extends BaseController {
                 $shortDescription = strip_tags(Input::get('shDescription'));
                 $fullDescription = strip_tags(Input::get('description'));
                 $placeTaken = strip_tags(Input::get('place'));
-                //$selectedCategories = Input::get('categories');
-                $selectedCategories = 'Uncategorized';
 
                 $moderators = array();
                 $moderators = Input::get('albumModerators');
 
                 $albums = new Albums();
-                return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories, $moderators);
+                return $albums->createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $moderators);
             }
         }
         return Redirect::back();

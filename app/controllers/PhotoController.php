@@ -277,7 +277,7 @@ class PhotoController extends BaseController {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function createCategory(){
-        $photo = new Photo();
+        $albums = new Albums();
         if(Auth::check())
             //if is admin
             if(Auth::user()->role_id == 1){
@@ -294,7 +294,8 @@ class PhotoController extends BaseController {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteCategory(){
-
+        $albums = new Albums();
+        //|| $albums->isUserAlbumPhotoModerator($currentPhotoId, $currentUserID)
         if(Auth::check())
             //if is admin
             if(Auth::user()->role_id == 1){

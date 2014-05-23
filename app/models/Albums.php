@@ -13,11 +13,10 @@ class Albums{
      * @param $shortDescription
      * @param $fullDescription
      * @param $placeTaken
-     * @param $selectedCategories
      * @param $moderators
      * @return \Illuminate\Http\RedirectResponse redirects page if success
      */
-    public function createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $selectedCategories, $moderators){
+    public function createAlbum($currentUserId, $albumName, $shortDescription, $fullDescription, $placeTaken, $moderators){
 
         $insertedAlbumId = DB::table('albums')->insertGetId(
             array(
@@ -57,7 +56,6 @@ class Albums{
         left join users on albums.user_id = users.id
         order by album_created_at', array());
     }
-
 
     /**
      * MODERATORS

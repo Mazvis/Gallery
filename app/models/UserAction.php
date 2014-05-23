@@ -21,5 +21,4 @@ class UserAction extends Eloquent {
         $model->ip = Request::getClientIp();
         $model->save();
     }
-
 } 

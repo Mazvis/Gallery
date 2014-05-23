@@ -32,10 +32,10 @@ class HomeController extends BaseController {
         $this->layout->content->albumsModel = new Albums();
         
         $this->layout->content->allUsers = array();
-        if (Auth::check()){
-                $users = new UserController();
-                $this->layout->content->allUsers = $users->getAllUsers(Auth::user()->id);
-            }
+        if (Auth::check()) {
+            $users = new UserController();
+            $this->layout->content->allUsers = $users->getAllUsers(Auth::user()->id);
+        }
     }
 
     /**
@@ -82,7 +82,6 @@ class HomeController extends BaseController {
 
         $albumData = $album->getAlbumDataByAlbumId($albumId);
         //if album exist
-
         if($albumData){
             $this->layout->content = View::make('singlealbum', array('albumId' => $albumId));
             $this->layout->bodyclass = "home-page";
@@ -144,11 +143,8 @@ class HomeController extends BaseController {
             $this->layout->content->photoData = $photoData[0];
 
             //tags
-            //$this->layout->content->tags = $photo->getTagsData($photoId);
             $this->layout->content->photoTags = $photo->getPhotoTagsRow($photoId);
             $this->layout->content->photoTagNames = $photo->getPhotoTagNames($photoId);
-
-            //$this->layout->content->allExistingTags = $photo->getAllExistingTags();
 
             //categories
             $this->layout->content->categories = $photo->getCategoriesData($photoId);
@@ -162,6 +158,7 @@ class HomeController extends BaseController {
             //comments
             $this->layout->content->comments = $photo->getPhotoComments($photoId);
 
+            //user roles
             $this->layout->content->isPhotoCreator = $photo->isUserPhotoCreator($photoId);
 
             //moderators
@@ -178,14 +175,12 @@ class HomeController extends BaseController {
     public function showTagPage($tagName) {
         $photo = new PhotoController();
 
-        //$tag = $photo->getTagData($tagName);
         $photos = $photo->getPhotosByTagName($tagName);
 
         //if this tag exists
         $this->layout->content = View::make('tag', array('tagName' => $tagName));
         $this->layout->bodyclass = "home-page";
 
-        //$this->layout->content->photos = $photo->getPhotoDataByTagId($tag[0]->tag_id);
         $this->layout->content->photos = $photos;
 
         $photoM = new Photo();
@@ -253,5 +248,4 @@ class HomeController extends BaseController {
         $this->layout->content = View::make('registration');
         $this->layout->bodyclass = "home-page";
     }
-
 }

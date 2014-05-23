@@ -21,7 +21,8 @@ class Album{
      * @param $writtenTags
      * @param $photoFile
      * @param $titlePhoto
-     * @return mixed
+     * @param $users
+     * @return string
      */
     public function uploadPhoto($currentAlbumId, $currentUserID, $photoName, $shortDescription, $placeTaken, $selectedCategories, $writtenTags, $photoFile, $titlePhoto,$users){
 
@@ -194,17 +195,15 @@ class Album{
      * Gets values from inputs ant edits album data
      *
      * @param $currentAlbumId
-     * @param $currentUserID
      * @param $albumName
      * @param $shortDescription
      * @param $fullDescription
      * @param $placeTaken
      * @param $titlePhotoFile
-     * @param $selectedCategories
      * @param $moreModeratorsToAdd
      * @param $moderatorsToDelete
      */
-    public function editAlbum($currentAlbumId, $currentUserID, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $selectedCategories, $moreModeratorsToAdd, $moderatorsToDelete){
+    public function editAlbum($currentAlbumId, $albumName, $shortDescription, $fullDescription, $placeTaken, $titlePhotoFile, $moreModeratorsToAdd, $moderatorsToDelete){
 
         DB::table('albums')
             ->where('album_id', $currentAlbumId)
@@ -236,30 +235,6 @@ class Album{
                 DB::delete('DELETE FROM album_moderators WHERE album_id = ? AND user_id = ?', array($currentAlbumId, $i));
             }
         }
-
-
-        //add categories(iff needed
-        /*$categoryAlreadyExist = DB::select('select * from album_categories where album_id = ?', array($currentAlbumId));
-        for($i = 0; $i < sizeOf($selectedCategories); $i++){
-            $catId = DB::select('select * from categories where category_name = ?', array($selectedCategories[$i]));
-            if($catId && !$categoryAlreadyExist) {
-                DB::table('album_categories')->insert(
-                    array(
-                        'album_id' => $currentAlbumId,
-                        'category_id' => $catId[0]->category_id,
-                    )
-                );
-            } elseif($categoryAlreadyExist) {
-                DB::table('album_categories')
-                    ->where('album_id', $currentAlbumId)
-                    ->update(
-                    array(
-                        'album_id' => $currentAlbumId,
-                        'category_id' => $catId[0]->category_id,
-                    )
-                );
-            }
-        }*/
 
         if ($titlePhotoFile != null){
             $file = $titlePhotoFile;
@@ -387,7 +362,6 @@ class Album{
             UserAction::add('Photo "' . ($photos[0]->photo_name) . '" was deleted');
 
             DB::table('photos')->where('photo_id', $photoId)->delete();
-            //DB::table('albums')->where('album_title_photo_id', $photoId)->update(array('album_title_photo_id' => null)); //???
         }
         return "Deleted";
     }

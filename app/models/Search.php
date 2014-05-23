@@ -1,9 +1,7 @@
 <?php
 
-
 class Search extends Eloquent
 {
-
     /**
      * The database table used by the model.
      *
@@ -12,6 +10,4 @@ class Search extends Eloquent
     protected $table = 'searches';
     
     public $timestamps = false;
-
-
 }
