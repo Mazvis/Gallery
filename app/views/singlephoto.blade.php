@@ -30,7 +30,7 @@
     <div class="col-sm-12">
         <p><strong>Photo Name:</strong>  {{ $photoData->photo_name }}</p>
         <p><strong>Album:</strong>  {{ HTML::link('albums/'.$photoData->album_id ,$photoData->album_name) }}</p>
-        <p><strong>Category:</strong>  @for ($i = 0; $i < sizeOf($categories); $i++) {{ HTML::link('category/'.$categories[$i], $categories[$i]) }}@if($i < sizeOf($categories)-1), @endif @endfor</p>
+        <p><strong>Category:</strong>  @for ($i = 0; $i < sizeOf($categories); $i++) {{ HTML::link('category/'.$categories[$i], $categories[$i]) }} @endfor</p>
         <p><strong>Place taken:</strong>  {{ $photoData->photo_taken_at }}</p>
         <p><strong>Created at:</strong>  {{ $photoData->photo_created_at }}</p>
         <p><strong>Photo description:</strong>  {{ $photoData->photo_short_description }}</p>

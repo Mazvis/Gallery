@@ -91,7 +91,7 @@
                 </a>
                 @if(Auth::check() && ($isPhotoCreator[$i] || $albumsModel->isUserAlbumPhotoModerator($photo_data_array2[$i]->photo_id, Auth::user()->id)))
                 <div class="caption photo-link" data-id="{{ $photo_data_array2[$i]->photo_id }}">
-                    <p>Album: {{ HTML::link('albums/'.$photo_data_array2[$i]->album_id.'/photo/'.$photo_data_array2[$i]->photo_id, $photo_data_array2[$i]->album_name) }} </p>
+                    <p>Album: {{ HTML::link('albums/'.$photo_data_array2[$i]->album_id, $photo_data_array2[$i]->album_name) }} </p>
                     <p>
                         {{ HTML::link(URL::to('albums/'.$photo_data_array2[$i]->album_id.'/photo/'.$photo_data_array2[$i]->photo_id), 'Edit', array('class' => 'btn btn-primary', 'role' => 'button')) }}
                         {{ Form::submit('Delete', array('id' => 'delete-photo-in-home', 'class' => 'btn btn-danger')) }}
