@@ -21,9 +21,9 @@ class AlbumController extends BaseController {
             $album = new Album();
             $albums = new Albums();
             $currentUserID = Auth::user()->id;
-            if($album->isUserAlbumCreator($currentUserID, $currentAlbumId)
-                || Auth::user()->role_id == 1
-                || $albums->isUserAlbumModerator($currentAlbumId, $currentUserID)
+            if(Auth::user()->role_id == 1 &&
+                ($album->isUserAlbumCreator($currentUserID, $currentAlbumId)
+                || $albums->isUserAlbumModerator($currentAlbumId, $currentUserID))
             ){
                 $photoName = strip_tags(Input::get('photoName'));
                 $shortDescription = strip_tags(Input::get('shDescription'));

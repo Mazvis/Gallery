@@ -380,6 +380,9 @@ class Album{
         //deletes all album comments
         DB::delete('delete from comments where album_id = ?', array($albumId));
 
+        //deletes all album moderators
+        DB::delete('delete from album_moderators where album_id = ?', array($albumId));
+
         $photos = DB::table('photos')->where('album_id', $albumId)->get();
 
         $albums = DB::table('albums')->where('album_id', $albumId)->get();

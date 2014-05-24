@@ -31,14 +31,14 @@
         <p><strong>Album name:</strong> {{ $albumData->album_name }}</p>
         <p><strong>Place:</strong> {{ $albumData->album_place }}</p>
         <p><strong>Created at:</strong> {{ $albumData->album_created_at }}</p>
-        <p><strong>Album fool description:</strong> Album full description: {{ $albumData->album_full_description }}</p>
-        <p><strong>Creator:</strong> {{ $albumData->username }}</p>
+        <p><strong>Album fool description:</strong> {{ $albumData->album_full_description }}</p>
+        <p><strong>Creator:</strong> {{ HTML::link('#', $albumData->username) }}</p>
         <p><strong>Moderators:</strong>
             @foreach($albumModerators as $moderator)
                 @if(end($albumModerators) != $moderator)
-                    {{ $moderator . ', ' }}
+                    {{ HTML::link('#', $moderator) . ', ' }}
                 @else
-                    {{ $moderator }}
+                    {{ HTML::link('#', $moderator) }}
                 @endif
             @endforeach
         </p>
@@ -115,7 +115,7 @@
         <div id="likers" class="panel-collapse collapse">
             <div class="panel-body">
                 @for ($i = 0; $i < sizeOf($likes); $i++)
-                    {{ HTML::link('user/'.$likes[$i]->username, $likes[$i]->username) }}
+                    {{ HTML::link('#', $likes[$i]->username) }}
                     @if($i < sizeOf($likes)-1)
                     ,
                     @endif

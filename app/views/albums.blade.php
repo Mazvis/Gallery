@@ -35,7 +35,7 @@
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <h3>{{ HTML::link('albums/'.$allAlbums[$i]->album_id, $allAlbums[$i]->album_name) }}</h3>
-            <p>By: {{ $allAlbums[$i]->username }}</p>
+            <p>By: {{ HTML::link('#', $allAlbums[$i]->username) }}</p>
             <a href="{{ URL::to('albums/'.$allAlbums[$i]->album_id) }}">
                 @if($allAlbums[$i]->album_title_photo_thumb_url && is_file($allAlbums[$i]->album_title_photo_thumb_url))
                 {{ HTML::image($allAlbums[$i]->album_title_photo_thumb_url, $allAlbums[$i]->album_short_description) }}

@@ -92,7 +92,7 @@
         <div id="likers" class="panel-collapse collapse">
             <div class="panel-body">
                 @for ($i = 0; $i < sizeOf($likes); $i++)
-                {{ HTML::link('user/'.$likes[$i]->username, $likes[$i]->username) }}@if($i < sizeOf($likes)-1),
+                {{ HTML::link('#', $likes[$i]->username) }}@if($i < sizeOf($likes)-1),
                 @endif
                 @endfor
             </div>
