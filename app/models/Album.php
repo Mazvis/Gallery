@@ -50,7 +50,7 @@ class Album{
                 $fileSize = $file->getSize();
 
                 if($extension == 'jpeg' || $extension == 'jpg' || $extension == 'bmp' || $extension == 'png' || $extension == 'gif')
-                    if($fileSize <= 1024*1024*3){
+                    if($fileSize <= 1024*1024*10){
                         //make: if this albumId exist in albums table do this insert
                         $isAlbumIdExist = DB::select('select album_id from albums where album_id = ?', array($currentAlbumId));
                         if($isAlbumIdExist){
