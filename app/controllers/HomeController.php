@@ -65,10 +65,10 @@ class HomeController extends BaseController {
         $this->layout->content->allExistingCategories = $photo->getAllExistingCategories();
 
         //moderators
+        $this->layout->content->albumsController = $albums;
         $this->layout->content->allOtherUsers = array();
         if (Auth::check()) {
             $this->layout->content->allOtherUsers = $albums->getAllOthersUsers(Auth::user()->id);
-            $this->layout->content->albumsController = $albums;
         }
     }
 
@@ -115,6 +115,8 @@ class HomeController extends BaseController {
             $this->layout->content->albumModerators = $albums->getAllAlbumModerators($albumId);
 
             $this->layout->content->usersLeft = array();
+
+            $this->layout->content->isUserAlbumModerator = false;
             if (Auth::check()){
                 $this->layout->content->usersLeft = $albums->showAllLeftUsers(Auth::user()->id, $albumId);
                 $this->layout->content->isUserAlbumModerator = $albums->isUserAlbumModerator($albumId, Auth::user()->id);
