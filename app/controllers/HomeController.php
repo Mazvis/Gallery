@@ -187,6 +187,9 @@ class HomeController extends BaseController {
 
         $photoM = new Photo();
         $this->layout->content->isPhotoCreator = $photoM->isPhotoCreatorForPhotosTemplate($photos);
+
+        //moderators
+        $this->layout->content->albumsModel = new Albums();
     }
 
     /*
@@ -230,6 +233,9 @@ class HomeController extends BaseController {
 
         $photoM = new Photo();
         $this->layout->content->isPhotoCreator = $photoM->isPhotoCreatorForPhotosTemplate($photos);
+
+        //moderators
+        $this->layout->content->albumsModel = new Albums();
     }
 
     /**
